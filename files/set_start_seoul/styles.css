@@ -983,3 +983,221 @@
   -moz-text-shadow:2px 4px 4px rgba(0, 0, 0, 0.250980392156863);
   text-transform:none;
 }
+#u87 {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:0px;
+  height:0px;
+}
+#u88_div {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:415px;
+  height:400px;
+  background:inherit;
+  background-color:rgba(255, 255, 255, 1);
+  border:none;
+  border-radius:0px;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+}
+#u88 {
+  border-width:0px;
+  position:absolute;
+  left:609px;
+  top:0px;
+  width:415px;
+  height:400px;
+  display:flex;
+}
+#u82 .text {
+  position:absolute;
+  align-self:center;
+  padding:5px 0px 0px 0px;
+  box-sizing:border-box;
+  width:100%;
+}
+#u88_text {
+  border-width:0px;
+  word-wrap:break-word;
+  text-transform:none;
+  visibility:hidden;
+}
+#u89_div {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:414px;
+  height:399px;
+  background:inherit;
+  background-color:rgba(31, 31, 31, 1);
+  border:none;
+  border-radius:0px;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+}
+#u89 {
+  border-width:0px;
+  position:absolute;
+  left:610px;
+  top:1px;
+  width:414px;
+  height:399px;
+  display:flex;
+}
+#u89 .text {
+  position:absolute;
+  align-self:center;
+  padding:5px 0px 0px 0px;
+  box-sizing:border-box;
+  width:100%;
+}
+#u89_text {
+  border-width:0px;
+  word-wrap:break-word;
+  text-transform:none;
+  visibility:hidden;
+}
+#u90_div {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:308px;
+  height:82px;
+  background:inherit;
+  background-color:rgba(255, 255, 255, 0);
+  border:none;
+  border-radius:0px;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+  font-family:'Segoe UI Normal', 'Segoe UI', sans-serif;
+  font-weight:400;
+  font-style:normal;
+  font-size:20px;
+  color:#AAAAAA;
+  text-align:left;
+}
+#u90 {
+  border-width:0px;
+  position:absolute;
+  left:663px;
+  top:280px;
+  width:308px;
+  height:82px;
+  display:flex;
+  font-family:'Segoe UI Normal', 'Segoe UI', sans-serif;
+  font-weight:400;
+  font-style:normal;
+  font-size:20px;
+  color:#AAAAAA;
+  text-align:left;
+}
+#u90 .text {
+  position:absolute;
+  align-self:flex-start;
+  padding:5px 0px 0px 0px;
+  box-sizing:border-box;
+  width:100%;
+}
+#u90_text {
+  border-width:0px;
+  word-wrap:break-word;
+  text-transform:none;
+}
+#u91_div {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:308px;
+  height:23px;
+  background:inherit;
+  background-color:rgba(255, 255, 255, 0);
+  border:none;
+  border-radius:0px;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+  font-family:'Segoe UI Negreta', 'Segoe UI Normal', 'Segoe UI', sans-serif;
+  font-weight:700;
+  font-style:normal;
+  font-size:20px;
+  color:#FFFFFF;
+  text-align:left;
+}
+#u91 {
+  border-width:0px;
+  position:absolute;
+  left:663px;
+  top:250px;
+  width:308px;
+  height:23px;
+  display:flex;
+  font-family:'Segoe UI Negreta', 'Segoe UI Normal', 'Segoe UI', sans-serif;
+  font-weight:700;
+  font-style:normal;
+  font-size:20px;
+  color:#FFFFFF;
+  text-align:left;
+}
+#u91 .text {
+  position:absolute;
+  align-self:flex-start;
+  padding:5px 0px 0px 0px;
+  box-sizing:border-box;
+  width:100%;
+}
+#u91_text {
+  border-width:0px;
+  word-wrap:break-word;
+  text-transform:none;
+}
+#u92_div {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:414px;
+  height:220px;
+  background:inherit;
+  background-color:rgba(255, 255, 255, 0);
+  background-repeat:no-repeat;
+  background-size:414px 232px;
+  background-position: 0.0px -6.0px;
+  border:none;
+  border-radius:0px;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+}
+#u92 {
+  border-width:0px;
+  position:absolute;
+  left:609px;
+  top:0px;
+  width:414px;
+  height:220px;
+  display:flex;
+}
+#u92 .text {
+  position:absolute;
+  align-self:center;
+  padding:5px 0px 0px 0px;
+  box-sizing:border-box;
+  width:100%;
+}
+#u92_text {
+  border-width:0px;
+  word-wrap:break-word;
+  text-transform:none;
+  visibility:hidden;
+}
