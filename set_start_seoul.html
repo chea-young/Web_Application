@@ -287,7 +287,7 @@
     var start_x = 37.554589;
     var start_y = 126.969092;
     var end_x = 37.570388;
-    var end_y = 126.992113
+    var end_y = 126.992113;
     var test_x = 37.5655;
     var test_y = 126.97;
     // Initialize Firebase
@@ -321,24 +321,44 @@
     messaging.onMessage(function(payload) {
         document.getElementById("body").innerHTML = payload.data.title;
         document.getElementById("title").innerHTML = payload.data.body;
-        document.getElementById("cctv_id").innerHTML = payload.data.cctv_id;
+        document.getElementById("cctv_name").innerHTML = payload.data.cctv_name;
          setTimeout(function() {  
           document.getElementById("Img").src = 'http://127.0.0.1:8000/media/situation_image/'+payload.data.image_name+'.png';
           console.log('onMessage: ', payload);
-          raise_notification()
+          check_range(payload.data.cctv_id_x,payload.data.cctv_id_y); // cctv 범위 확인해주는 함수
+          raise_notification(payload.data.cctv_id_x,payload.data.cctv_id_y);
         }, 3000);
-        //'C:/Users/w1004/Documents/GitHub/FCM_push_server/tutorial/axure/알림화면/sample_dog.jpg'
-        //'../../sample_dog.jpg'
     });
     
-    function raise_notification() {
-      if (start_x < test_x < start_y) {
-        if (end_x < test_y < end_y) {
+    // start_x, start_y 출발지 위도 경도, end_x, end_y 도착지 위도 경도 인지 물어보기
+    //  point1-------point2
+    //   -             -
+    //   -             -
+    //  point3-------point3
+    function check_range(cctv_id_x, cctv_id_y) {
+      var point1, point2, point3, point4 = start_x, end_x, start_y, end_y;
+      var width = (start_x-end_x)/2;
+      if(width < 0){
+        width = width *(-1);
+        point1, point2 = end_x, start_x;
+      }
+      var length = (start_y-end_y)/2;
+      if(length < 0){
+        length = length*(-1);
+        point3, point4 = end_y, start_y;
+      }
+      if (point1-width <= cctv_id_x && cctv_id_x <= point2+width) {
+        if (point3-length <= cctv_id_y && cctv_id_y <= point4-length) {
+          raise_notification()//해당 cctv가 범위안에 있으면 알람 불러주기
           //alert('hello') if문 돌아가는거 확인. 지워야함.
-          document.getElementById("u87").style.visibility = "visible"
-          document.getElementById("u87").style.display = "block"
         } //cctv_id를 cctv_x, y 좌표값으로 보내주면 default값 좌표랑 비교해서 수행하려는데
       } //cctv_id 변수를 어떤식으로 지정하는지 모르겠음, test_x y 대신 payload.data.cctv_x y 이런식으로 받으면 되는지 모르겠음.
+
+    }
+    function raise_notification(){
+      document.getElementById("u87").style.visibility = "visible"
+      document.getElementById("u87").style.display = "block"
+      // cctv 색 바꿔주기
       setTimeout(function() {  
         document.getElementById("u87").style.visibility = "hidden"
         document.getElementById("u87").style.display = "none"
