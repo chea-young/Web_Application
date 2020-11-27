@@ -118,7 +118,7 @@
 		var position3 = new naver.maps.LatLng(37.569834, 127.002028);//청계2가
 		var position4 = new naver.maps.LatLng(37.554589,126.969092); //출발지 위치
 		var position5 = new naver.maps.LatLng(37.570388,126.992113); //도착지 위치
-
+		//알림시 cctv 위치 바꾸는 방법으로 이부분 script를 js파일로 만들어서 불러서 set_start_seoul에 import 해서 바뀌게 하기
 		var start_url = "https://www.google.co.kr/maps/search/%EC%84%9C%EC%9A%B8%EC%97%AD/@37.5536387,126.97137,16z/data=!3m1!4b1";
 		var urlData = start_url.substring(start_url.indexOf("@") + 1);
 		var startinfo = urlData.split(','); //startinfo
