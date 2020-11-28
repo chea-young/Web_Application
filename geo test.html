@@ -19,16 +19,18 @@ var map = new naver.maps.Map('map', {
 
 naver.maps.Service.fromAddrToCoord({ address: '불정로 6' }, function(status, response) {
     if (status === naver.maps.Service.Status.ERROR) {
-        return alert('Something wrong!');
+        return console.log('Something wrong!');
     }
 
     // 성공 시의 response 처리
-    alert('0' + response.result.userquery);
-    alert('1' + response.result.items[0].address);
-    alert('2' + response.v2.addresses[0].jibunAddress)
-    alert('3' + '경도: ' + response.result.items[0].point.x + ', 위도: ' +response.result.items[0].point.y)
-    return alert('4' + 'Good job!');
+    console.log(response.result.userquery); // 입력값
+    console.log(response.result.items[1].address); // 도로명 주소
+    console.log(response.v2.addresses[0].jibunAddress) //지번 주소
+    console.log(response.v2.addresses[0].addressElements[6].longName) // 건물이름 뽑아옴.
+    console.log('경도: ' + response.result.items[0].point.x + ', 위도: ' +response.result.items[0].point.y)
 });
+
+//이코드 사용해서 주소로 건물이름이나 위도경도 뽑아오기 가능.
 
 </script>
 </body>

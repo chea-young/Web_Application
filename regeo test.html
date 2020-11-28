@@ -21,16 +21,17 @@ naver.maps.Service.reverseGeocode({
         location: new naver.maps.LatLng(37.3595316, 127.1052133),
     }, function(status, response) {
         if (status !== naver.maps.Service.Status.OK) {
-            return alert('Something wrong!');
+            return console.log('Something wrong!');
         }
 
         var result = response.result, // 검색 결과의 컨테이너
             items = result.items; // 검색 결과의 배열
 
         // do Something
-        alert('검색 위,경도: ' + result.userquery);
-        alert('지번 주소: ' + items[0].address);
-        alert('도로명 주소: ' + items[1].address);
+        console.log('검색 위,경도: ' + result.userquery);
+        console.log('지번 주소: ' + items[0].address);
+        console.log('도로명 주소: ' + items[1].address);
+        console.log('건물 이름: ' + items[1].addrdetail.rest)
     });
 
 </script>
