@@ -1,13 +1,12 @@
 ﻿<!DOCTYPE html>
 <html>
   <head>
-    <title>map</title>
+    <title>map5</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
     <link href="data/styles.css" type="text/css" rel="stylesheet"/>
-    <link href="files/map/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="files/map5/styles.css" type="text/css" rel="stylesheet"/>
     <script src="resources/scripts/jquery-3.2.1.min.js"></script>
     <script src="resources/scripts/axure/axQuery.js"></script>
     <script src="resources/scripts/axure/globals.js"></script>
@@ -39,79 +38,16 @@
     <script src="resources/scripts/axure/math.js"></script>
     <script src="resources/scripts/axure/jquery.nicescroll.min.js"></script>
     <script src="data/document.js"></script>
-    <script src="files/map/data.js"></script>
-    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=rpbl1d7siz">
+    <script src="files/map5/data.js"></script>
+    <script type="text/javascript">
       $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
       $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
       $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
     </script>
-	<style>
-	body{margin:0px;}
-	</style>
   </head>
   <body>
-    <div id="map" style="width: 1395px; height:595px;"></div>
-	<script>
-		var map = new naver.maps.Map('map', {
-			center: new naver.maps.LatLng(37.554646,126.9690018),
-			zoom: 15,
-			mapTypeId: naver.maps.MapTypeId.NORMAL
-		});
-		
-		var position = new naver.maps.LatLng(37.554646,126.9690018);
-		var position1 = new naver.maps.LatLng(37.570071,126.977124);
-		var position2 = new naver.maps.LatLng(37.515168,126.996125);
-		var position3 = new naver.maps.LatLng(37.546248,126.987679);
-		
-		var markerOptions = {
-			position: position,
-			map: map,
-			icon: {
-				url: './images/CAR1.png',
-				size: new naver.maps.Size(21, 38),
-				origin: new naver.maps.Point(0, 0),
-				anchor: new naver.maps.Point(11, 35)
-			}
-		};
-
-		var markerOptions1 = {
-			position: position1,
-			map: map,
-			icon: {
-				url: './images/CCTV1.png',
-				size: new naver.maps.Size(29, 29),
-				origin: new naver.maps.Point(0, 0),
-				anchor: new naver.maps.Point(11, 35)
-			}
-		};
-		var markerOptions2 = {
-			position: position2,
-			map: map,
-			icon: {
-				url: './images/CCTV2.png',
-				size: new naver.maps.Size(29, 29),
-				origin: new naver.maps.Point(0, 0),
-				anchor: new naver.maps.Point(11, 35)
-			}
-		};
-		var markerOptions3 = {
-			position: position3,
-			map: map,
-			icon: {
-				url: './images/CCTV3.png',
-				size: new naver.maps.Size(29, 29),
-				origin: new naver.maps.Point(0, 0),
-				anchor: new naver.maps.Point(11, 35)
-			}
-		};
-		
-		var marker = new naver.maps.Marker(markerOptions);
-		var marker = new naver.maps.Marker(markerOptions1);
-		var marker = new naver.maps.Marker(markerOptions2);
-		var marker = new naver.maps.Marker(markerOptions3);
-
-	</script>
-	
+    <div id="base" class="">
+    </div>
     <script src="resources/scripts/axure/ios.js"></script>
   </body>
 </html>

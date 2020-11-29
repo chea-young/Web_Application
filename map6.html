@@ -1,13 +1,12 @@
 ﻿<!DOCTYPE html>
 <html>
   <head>
-    <title>map</title>
+    <title>map6</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
     <link href="data/styles.css" type="text/css" rel="stylesheet"/>
-    <link href="files/map/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="files/map6/styles.css" type="text/css" rel="stylesheet"/>
     <script src="resources/scripts/jquery-3.2.1.min.js"></script>
     <script src="resources/scripts/axure/axQuery.js"></script>
     <script src="resources/scripts/axure/globals.js"></script>
@@ -39,142 +38,16 @@
     <script src="resources/scripts/axure/math.js"></script>
     <script src="resources/scripts/axure/jquery.nicescroll.min.js"></script>
     <script src="data/document.js"></script>
-    <script src="files/map/data.js"></script>
-    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=rpbl1d7siz">
+    <script src="files/map6/data.js"></script>
+    <script type="text/javascript">
       $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
       $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
       $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
     </script>
-	<style>
-	body{margin:0px;}
-	</style>
   </head>
   <body>
-    <div id="map" style="width: 695px; height:595px;"></div>
-	<script>
-		var HOME_PATH = window.HOME_PATH || '.';
-
-		var map = new naver.maps.Map('map', {
-			center: new naver.maps.LatLng(37.554646,126.9690018),
-			mapTypeControl: true,
-			zoom: 14,
-			mapTypeControlOptions: {
-				style: naver.maps.MapTypeControlStyle.DROPDOWN
-			}
-		});
-
-		var trafficLayer = new naver.maps.TrafficLayer({
-			interval: 300000 // 5분마다 새로고침 (최소값 5분)
-		});
-
-		var btn = $('#traffic');
-
-		naver.maps.Event.addListener(map, 'trafficLayer_changed', function(trafficLayer) {
-			if (trafficLayer) {
-				btn.addClass('control-on');
-				$("#autorefresh").parent().show();
-				$("#autorefresh")[0].checked = true;
-			} else {
-				btn.removeClass('control-on');
-				$("#autorefresh").parent().hide();
-			}
-		});
-
-		btn.on("click", function(e) {
-			e.preventDefault();
-
-			if (trafficLayer.getMap()) {
-				trafficLayer.setMap(null);
-			} else {
-				trafficLayer.setMap(map);
-			}
-		});
-
-		$("#autorefresh").on("click", function(e) {
-			var btn = $(this),
-				checked = btn.is(":checked");
-
-			if (checked) {
-				trafficLayer.startAutoRefresh();
-			} else {
-				trafficLayer.endAutoRefresh();
-			}
-		});
-
-		naver.maps.Event.once(map, 'init_stylemap', function() {
-			trafficLayer.setMap(map);
-		});
-		
-		var contentString = [
-				'<div class="iw_inner">',
-				'   <h3>남산터널 남단 CCTV</h3>',
-				'   <p><img src="'+ HOME_PATH +'/images/car_accident.jpg" width="200" height="113" alt="" class="thumb" /></p>',
-				'</div>'
-			].join('');
-
-		var position = new naver.maps.LatLng(37.554646,126.9690018);
-		var position1 = new naver.maps.LatLng(37.570071,126.977124);
-		var position2 = new naver.maps.LatLng(37.515168,126.996125);
-		var position3 = new naver.maps.LatLng(37.546248,126.987679);
-		
-		var markerOptions = {
-			position: position,
-			map: map,
-			icon: {
-				url: './images/CAR1.png',
-				size: new naver.maps.Size(21, 38),
-				origin: new naver.maps.Point(0, 0),
-				anchor: new naver.maps.Point(11, 35)
-			}
-		};
-		var markerOptions1 = {
-			position: position1,
-			map: map,
-			icon: {
-				url: './images/CCTV1.png',
-				size: new naver.maps.Size(29, 29),
-				origin: new naver.maps.Point(0, 0),
-				anchor: new naver.maps.Point(11, 35)
-			}
-		};
-		var markerOptions2 = {
-			position: position2,
-			map: map,
-			icon: {
-				url: './images/CCTV2.png',
-				size: new naver.maps.Size(29, 29),
-				origin: new naver.maps.Point(0, 0),
-				anchor: new naver.maps.Point(11, 35)
-			}
-		};
-		var markerOptions3 = {
-			position: position3,
-			map: map,
-			icon: {
-				url: './images/CCTV3.png',
-				size: new naver.maps.Size(29, 29),
-				origin: new naver.maps.Point(0, 0),
-				anchor: new naver.maps.Point(11, 35)
-			}
-		};
-		
-		var marker = new naver.maps.Marker(markerOptions);
-		var marker = new naver.maps.Marker(markerOptions1);
-		var marker = new naver.maps.Marker(markerOptions2);
-		var marker1 = new naver.maps.Marker(markerOptions3);
-
-		var infowindow = new naver.maps.InfoWindow({
-			content: contentString
-		});
-
-		naver.maps.Event.addListener(marker1, "click", function(e) {
-			if (infowindow.getMap()) {
-				infowindow.close();
-			} else {
-				infowindow.open(map, marker1);
-			}
-		});
-	</script>
+    <div id="base" class="">
+    </div>
     <script src="resources/scripts/axure/ios.js"></script>
   </body>
 </html>
