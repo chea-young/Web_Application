@@ -1,13 +1,12 @@
 ﻿<!DOCTYPE html>
 <html>
   <head>
-    <title>map</title>
+    <title>map2</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
     <link href="data/styles.css" type="text/css" rel="stylesheet"/>
-    <link href="files/map/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="files/map2/styles.css" type="text/css" rel="stylesheet"/>
     <script src="resources/scripts/jquery-3.2.1.min.js"></script>
     <script src="resources/scripts/axure/axQuery.js"></script>
     <script src="resources/scripts/axure/globals.js"></script>
@@ -39,189 +38,16 @@
     <script src="resources/scripts/axure/math.js"></script>
     <script src="resources/scripts/axure/jquery.nicescroll.min.js"></script>
     <script src="data/document.js"></script>
-    <script src="files/map/data.js"></script>
-    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=rpbl1d7siz">
+    <script src="files/map2/data.js"></script>
+    <script type="text/javascript">
       $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
       $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
       $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
     </script>
-	<style>
-	body{margin:0px;}
-	</style>
   </head>
   <body>
-    <div id="map" style="width: 695px; height:595px;"></div>
-	<script>
-		var map = new naver.maps.Map('map', {
-			center: new naver.maps.LatLng(location),
-			mapTypeControl: true,
-			mapTypeControlOptions: {
-				style: naver.maps.MapTypeControlStyle.DROPDOWN
-			}
-		});
-
-		var trafficLayer = new naver.maps.TrafficLayer({
-			interval: 300000 // 5분마다 새로고침 (최소값 5분)
-		});
-
-		var btn = $('#traffic');
-
-		naver.maps.Event.addListener(map, 'trafficLayer_changed', function(trafficLayer) {
-			if (trafficLayer) {
-				btn.addClass('control-on');
-				$("#autorefresh").parent().show();
-				$("#autorefresh")[0].checked = true;
-			} else {
-				btn.removeClass('control-on');
-				$("#autorefresh").parent().hide();
-			}
-		});
-
-		btn.on("click", function(e) {
-			e.preventDefault();
-
-			if (trafficLayer.getMap()) {
-				trafficLayer.setMap(null);
-			} else {
-				trafficLayer.setMap(map);
-			}
-		});
-
-		$("#autorefresh").on("click", function(e) {
-			var btn = $(this),
-				checked = btn.is(":checked");
-
-			if (checked) {
-				trafficLayer.startAutoRefresh();
-			} else {
-				trafficLayer.endAutoRefresh();
-			}
-		});
-
-		naver.maps.Event.once(map, 'init_stylemap', function() {
-			trafficLayer.setMap(map);
-		});
-
-		function onSuccessGeolocation(position) {
-			var location = new naver.maps.LatLng(position.coords.latitude,
-											 position.coords.longitude);
-
-			map.setCenter(location); // 얻은 좌표를 지도의 중심으로 설정합니다.
-			map.setZoom(18); // 지도의 줌 레벨을 변경합니다.
-
-			var markerOptions = {
-				position: location,
-				map: map,
-				icon: {
-					url: './images/CAR1.png',
-					size: new naver.maps.Size(21, 38),
-					origin: new naver.maps.Point(0, 0),
-					anchor: new naver.maps.Point(11, 35)
-				}
-			};
-			
-			var marker = new naver.maps.Marker(markerOptions);
-			console.log('Coordinates: ' + location.toString());
-		}
-
-		function onErrorGeolocation() {
-			var center = map.getCenter();
-
-			infowindow.setContent('<div style="padding:20px;">' +
-				'<h5 style="margin-bottom:5px;color:#f00;">Geolocation failed!</h5>'+ "latitude: "+ center.lat() +"<br />longitude: "+ center.lng() +'</div>');
-
-			infowindow.open(map, center);
-		}
-
-		$(window).on("load", function() {
-			if (navigator.geolocation) {
-				/**
-				 * navigator.geolocation 은 Chrome 50 버젼 이후로 HTTP 환경에서 사용이 Deprecate 되어 HTTPS 환경에서만 사용 가능 합니다.
-				 * http://localhost 에서는 사용이 가능하며, 테스트 목적으로, Chrome 의 바로가기를 만들어서 아래와 같이 설정하면 접속은 가능합니다.
-				 * chrome.exe --unsafely-treat-insecure-origin-as-secure="http://example.com"
-				 */
-				navigator.geolocation.getCurrentPosition(onSuccessGeolocation, onErrorGeolocation);
-			} else {
-				var center = map.getCenter();
-				infowindow.setContent('<div style="padding:20px;"><h5 style="margin-bottom:5px;color:#f00;">Geolocation not supported</h5></div>');
-				infowindow.open(map, center);
-			}
-		});
-		
-		var position1 = new naver.maps.LatLng(37.335465,127.257920);
-		var position2 = new naver.maps.LatLng(37.333464,127.248054);
-		var position3 = new naver.maps.LatLng(37.339249,127.249938);
-		var position4 = new naver.maps.LatLng(37.419168,126.922588);
-		var position5 = new naver.maps.LatLng(37.419617,126.925459);
-		var position6 = new naver.maps.LatLng(37.419828,126.923773);
-		var markerOptions1 = {
-			position: position1,
-			map: map,
-			icon: {
-				url: './images/CCTV1.png',
-				size: new naver.maps.Size(29, 29),
-				origin: new naver.maps.Point(0, 0),
-				anchor: new naver.maps.Point(11, 35)
-			}
-		};
-		var markerOptions2 = {
-			position: position2,
-			map: map,
-			icon: {
-				url: './images/CCTV2.png',
-				size: new naver.maps.Size(29, 29),
-				origin: new naver.maps.Point(0, 0),
-				anchor: new naver.maps.Point(11, 35)
-			}
-		};
-		var markerOptions3 = {
-			position: position3,
-			map: map,
-			icon: {
-				url: './images/CCTV3.png',
-				size: new naver.maps.Size(29, 29),
-				origin: new naver.maps.Point(0, 0),
-				anchor: new naver.maps.Point(11, 35)
-			}
-		};
-		var markerOptions4 = {
-			position: position4,
-			map: map,
-			icon: {
-				url: './images/CCTV1.png',
-				size: new naver.maps.Size(29, 29),
-				origin: new naver.maps.Point(0, 0),
-				anchor: new naver.maps.Point(11, 35)
-			}
-		};
-		var markerOptions5 = {
-			position: position5,
-			map: map,
-			icon: {
-				url: './images/CCTV2.png',
-				size: new naver.maps.Size(29, 29),
-				origin: new naver.maps.Point(0, 0),
-				anchor: new naver.maps.Point(11, 35)
-			}
-		};
-		var markerOptions6 = {
-			position: position6,
-			map: map,
-			icon: {
-				url: './images/CCTV3.png',
-				size: new naver.maps.Size(29, 29),
-				origin: new naver.maps.Point(0, 0),
-				anchor: new naver.maps.Point(11, 35)
-			}
-		};
-		
-		var marker = new naver.maps.Marker(markerOptions1);
-		var marker = new naver.maps.Marker(markerOptions2);
-		var marker = new naver.maps.Marker(markerOptions3);
-		var marker = new naver.maps.Marker(markerOptions4);
-		var marker = new naver.maps.Marker(markerOptions5);
-		var marker = new naver.maps.Marker(markerOptions6);
-	</script>
+    <div id="base" class="">
+    </div>
     <script src="resources/scripts/axure/ios.js"></script>
   </body>
 </html>
