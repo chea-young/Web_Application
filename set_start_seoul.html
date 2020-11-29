@@ -589,10 +589,6 @@
   <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
 <script>
     
-    var start_x = 37.554589;
-    var start_y = 126.969092;
-    var end_x = 37.570388;
-    var end_y = 126.992113;
     var test_x = 37.5655;
     var test_y = 126.97;
     // Initialize Firebase
@@ -698,7 +694,19 @@
           document.getElementById("u70_div").style.visibility = "hidden"
           document.getElementById("u70_div").style.display = "none"
         }, 3000);
+        markerOptions1 = {
+			position: position1,
+			map: map,
+			icon: {
+				url: './images/CCTV3.png',
+				size: new naver.maps.Size(29, 29),
+				origin: new naver.maps.Point(0, 0),
+				anchor: new naver.maps.Point(11, 35)
+			}
+		};
+        var marker = new naver.maps.Marker(markerOptions);
 
+        //색 바꿔주기
       } else if(type == 'ob'){
         document.getElementById("u67_text").style.visibility = "visible"
         document.getElementById("u67_text").style.display = "block"
@@ -726,6 +734,18 @@
           document.getElementById("u63_div").style.visibility = "hidden"
           document.getElementById("u63_div").style.display = "none"
         }, 3000);
+        markerOptions3 = {
+          position: position3,
+          map: map,
+          icon: {
+            url: './images/CCTV3.png',
+            size: new naver.maps.Size(29, 29),
+            origin: new naver.maps.Point(0, 0),
+            anchor: new naver.maps.Point(11, 35)
+          }
+        };
+        var marker = new naver.maps.Marker(markerOptions3);
+
       }
       // cctv 색 바꿔주기
     }
