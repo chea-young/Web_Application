@@ -164,10 +164,7 @@
         </div>
       </div>
 
-      <!-- map1 (Inline Frame) -->
-      <div id="u48" class="ax_default ax_default_hidden" data-label="map1" style="display:none; visibility: hidden">
-        <iframe id="u48_input" data-label="map1" scrolling="auto" frameborder="1" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-      </div>
+
 
       <!-- Rectangle 2 (Shape) -->
       <div id="u49" class="ax_default shape" data-label="Rectangle 2">
@@ -366,6 +363,10 @@
         </div>
       </div>
     </div>
+    <div id="floating-panel">
+      <input id="submit" type="button" value="Geocode">
+    </div>
+    <div id="map1" style="display:none; visibility: hidden"  ></div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRW4jYiIHAQnayCnEwDA3uFwbJFgfThec&signed_in=true&callback=initMap"
         async defer></script>
     <script src="resources/scripts/axure/ios.js"></script>
@@ -373,6 +374,10 @@
     	<script>
       var start_point = 0;
       var end_point = 0;
+      var start_x; //출발지 위도
+      var start_y; //출발지 경도
+      var end_x; //도착지 위도
+      var end_y; //도착지 경도
       function change() {
         console.log('he');
         start_point = document.getElementById("u53_data").innerHTML; //출발지
@@ -381,8 +386,46 @@
         //console.log(document.getElementById("u53").innerHTML, document.getElementById("u54").innerHTML);
         //console.log(document.getElementById("u53_data").innerHTML, document.getElementById("u54_data").innerHTML);
         console.log(start_point, end_point);
-        geocodeAddress(geocoder, map);
       }
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map1'), {
+          zoom: 10,
+          center: {lat: 17.3700, lng: 78.4800}
+        });
+        var geocoder = new google.maps.Geocoder();
+
+        document.getElementById('submit').addEventListener('click', function() {
+          geocodeAddress(geocoder, map);
+        });
+        document.getElementById('u47_text').addEventListener('click', function() {
+          geocodeAddress(geocoder, map);
+        });
+      }
+      function geocodeAddress(geocoder, resultsMap) {
+        geocoder.geocode({'address': start_point}, function(results, status) {
+          if (status === google.maps.GeocoderStatus.OK) {
+            resultsMap.setCenter(results[0].geometry.location);
+            console.log(start_point);
+            start_x = (results[0].geometry.viewport.Wa.j + results[0].geometry.viewport.Wa.i)/2;//위도
+            start_y = (results[0].geometry.viewport.Sa.j + results[0].geometry.viewport.Sa.i)/2;//경도
+            console.log(start_x, start_y);
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+        geocoder.geocode({'address': end_point}, function(results, status) {
+          if (status === google.maps.GeocoderStatus.OK) {
+            resultsMap.setCenter(results[0].geometry.location);
+            console.log(end_point);
+            end_x = (results[0].geometry.viewport.Wa.j + results[0].geometry.viewport.Wa.i)/2;//위도
+            end_y = (results[0].geometry.viewport.Sa.j + results[0].geometry.viewport.Sa.i)/2;//경도
+            console.log(end_x, end_y)
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+      }
+
 
 		var HOME_PATH = window.HOME_PATH || '.';
 
