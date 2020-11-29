@@ -1061,23 +1061,13 @@
   -moz-text-shadow:2px 4px 4px rgba(0, 0, 0, 0.250980392156863);
   text-transform:none;
 }
-#u61_div {
+#u61_img {
   border-width:0px;
   position:absolute;
   left:0px;
   top:0px;
   width:700px;
   height:516px;
-  background:inherit;
-  background-color:rgba(255, 255, 255, 0);
-  box-sizing:border-box;
-  border-width:1px;
-  border-style:solid;
-  border-color:rgba(121, 121, 121, 1);
-  border-radius:0px;
-  -moz-box-shadow:none;
-  -webkit-box-shadow:none;
-  box-shadow:none;
 }
 #u61 {
   border-width:0px;
@@ -1114,10 +1104,10 @@
   position:absolute;
   left:0px;
   top:0px;
-  width:415px;
-  height:400px;
+  width:374px;
+  height:342px;
   background:inherit;
-  background-color:rgba(255, 255, 255, 1);
+  background-color:rgba(255, 255, 255, 0);
   border:none;
   border-radius:0px;
   -moz-box-shadow:none;
@@ -1127,10 +1117,10 @@
 #u63 {
   border-width:0px;
   position:absolute;
-  left:542px;
-  top:3px;
-  width:415px;
-  height:400px;
+  left:459px;
+  top:0px;
+  width:374px;
+  height:342px;
   display:flex;
 }
 #u63 .text {
@@ -1151,8 +1141,8 @@
   position:absolute;
   left:0px;
   top:0px;
-  width:414px;
-  height:399px;
+  width:374px;
+  height:341px;
   background:inherit;
   background-color:rgba(31, 31, 31, 1);
   border:none;
@@ -1164,10 +1154,10 @@
 #u64 {
   border-width:0px;
   position:absolute;
-  left:543px;
-  top:4px;
-  width:414px;
-  height:399px;
+  left:459px;
+  top:1px;
+  width:374px;
+  height:341px;
   display:flex;
 }
 #u64 .text {
@@ -1188,8 +1178,8 @@
   position:absolute;
   left:0px;
   top:0px;
-  width:308px;
-  height:82px;
+  width:277px;
+  height:70px;
   background:inherit;
   background-color:rgba(255, 255, 255, 0);
   border:none;
@@ -1200,22 +1190,22 @@
   font-family:'Segoe UI Normal', 'Segoe UI', sans-serif;
   font-weight:400;
   font-style:normal;
-  font-size:20px;
+  font-size:18px;
   color:#AAAAAA;
   text-align:left;
 }
 #u65 {
   border-width:0px;
   position:absolute;
-  left:595px;
-  top:307px;
-  width:308px;
-  height:82px;
+  left:507px;
+  top:260px;
+  width:277px;
+  height:70px;
   display:flex;
   font-family:'Segoe UI Normal', 'Segoe UI', sans-serif;
   font-weight:400;
   font-style:normal;
-  font-size:20px;
+  font-size:18px;
   color:#AAAAAA;
   text-align:left;
 }
@@ -1236,8 +1226,8 @@
   position:absolute;
   left:0px;
   top:0px;
-  width:308px;
-  height:26px;
+  width:277px;
+  height:22px;
   background:inherit;
   background-color:rgba(255, 255, 255, 0);
   border:none;
@@ -1248,22 +1238,22 @@
   font-family:'Segoe UI Negreta', 'Segoe UI Normal', 'Segoe UI', sans-serif;
   font-weight:700;
   font-style:normal;
-  font-size:20px;
+  font-size:18px;
   color:#FFFFFF;
   text-align:left;
 }
 #u66 {
   border-width:0px;
   position:absolute;
-  left:596px;
-  top:270px;
-  width:308px;
-  height:26px;
+  left:508px;
+  top:228px;
+  width:277px;
+  height:22px;
   display:flex;
   font-family:'Segoe UI Negreta', 'Segoe UI Normal', 'Segoe UI', sans-serif;
   font-weight:700;
   font-style:normal;
-  font-size:20px;
+  font-size:18px;
   color:#FFFFFF;
   text-align:left;
 }
@@ -1284,8 +1274,8 @@
   position:absolute;
   left:0px;
   top:0px;
-  width:93px;
-  height:30px;
+  width:84px;
+  height:26px;
   background:inherit;
   background-color:rgba(255, 255, 255, 0);
   border:none;
@@ -1296,22 +1286,22 @@
   font-family:'Segoe UI Negreta', 'Segoe UI Normal', 'Segoe UI', sans-serif;
   font-weight:700;
   font-style:normal;
-  font-size:20px;
+  font-size:18px;
   color:#FFFFFF;
   text-align:left;
 }
 #u67 {
   border-width:0px;
   position:absolute;
-  left:703px;
-  top:228px;
-  width:93px;
-  height:30px;
+  left:604px;
+  top:193px;
+  width:84px;
+  height:26px;
   display:flex;
   font-family:'Segoe UI Negreta', 'Segoe UI Normal', 'Segoe UI', sans-serif;
   font-weight:700;
   font-style:normal;
-  font-size:20px;
+  font-size:18px;
   color:#FFFFFF;
   text-align:left;
 }
@@ -1332,14 +1322,14 @@
   position:absolute;
   left:0px;
   top:0px;
-  width:414px;
-  height:220px;
+  width:374px;
+  height:188px;
   background:inherit;
   background-color:rgba(255, 255, 255, 0);
   background-image:url('../../images/set_start_seoul/u68_div.png');
   background-repeat:no-repeat;
-  background-size:414px 232px;
-  background-position: 0.0px -6.0px;
+  background-size:374px 210px;
+  background-position: 0.0px -11.0px;
   border:none;
   border-radius:0px;
   -moz-box-shadow:none;
@@ -1349,10 +1339,10 @@
 #u68 {
   border-width:0px;
   position:absolute;
-  left:542px;
-  top:3px;
-  width:414px;
-  height:220px;
+  left:459px;
+  top:0px;
+  width:374px;
+  height:188px;
   display:flex;
 }
 #u68 .text {
@@ -1381,10 +1371,10 @@
   position:absolute;
   left:0px;
   top:0px;
-  width:415px;
-  height:400px;
+  width:377px;
+  height:343px;
   background:inherit;
-  background-color:rgba(255, 255, 255, 1);
+  background-color:rgba(255, 255, 255, 0);
   border:none;
   border-radius:0px;
   -moz-box-shadow:none;
@@ -1394,10 +1384,10 @@
 #u70 {
   border-width:0px;
   position:absolute;
-  left:988px;
-  top:0px;
-  width:415px;
-  height:400px;
+  left:866px;
+  top:-1px;
+  width:377px;
+  height:343px;
   display:flex;
 }
 #u70 .text {
@@ -1418,8 +1408,8 @@
   position:absolute;
   left:0px;
   top:0px;
-  width:414px;
-  height:399px;
+  width:376px;
+  height:342px;
   background:inherit;
   background-color:rgba(31, 31, 31, 1);
   border:none;
@@ -1431,10 +1421,10 @@
 #u71 {
   border-width:0px;
   position:absolute;
-  left:989px;
-  top:1px;
-  width:414px;
-  height:399px;
+  left:867px;
+  top:0px;
+  width:376px;
+  height:342px;
   display:flex;
 }
 #u71 .text {
@@ -1455,8 +1445,8 @@
   position:absolute;
   left:0px;
   top:0px;
-  width:308px;
-  height:82px;
+  width:279px;
+  height:71px;
   background:inherit;
   background-color:rgba(255, 255, 255, 0);
   border:none;
@@ -1467,22 +1457,22 @@
   font-family:'Segoe UI Normal', 'Segoe UI', sans-serif;
   font-weight:400;
   font-style:normal;
-  font-size:20px;
+  font-size:18px;
   color:#AAAAAA;
   text-align:left;
 }
 #u72 {
   border-width:0px;
   position:absolute;
-  left:1041px;
-  top:304px;
-  width:308px;
-  height:82px;
+  left:914px;
+  top:260px;
+  width:279px;
+  height:71px;
   display:flex;
   font-family:'Segoe UI Normal', 'Segoe UI', sans-serif;
   font-weight:400;
   font-style:normal;
-  font-size:20px;
+  font-size:18px;
   color:#AAAAAA;
   text-align:left;
 }
@@ -1503,8 +1493,8 @@
   position:absolute;
   left:0px;
   top:0px;
-  width:308px;
-  height:26px;
+  width:279px;
+  height:22px;
   background:inherit;
   background-color:rgba(255, 255, 255, 0);
   border:none;
@@ -1515,22 +1505,22 @@
   font-family:'Segoe UI Negreta', 'Segoe UI Normal', 'Segoe UI', sans-serif;
   font-weight:700;
   font-style:normal;
-  font-size:20px;
+  font-size:18px;
   color:#FFFFFF;
   text-align:left;
 }
 #u73 {
   border-width:0px;
   position:absolute;
-  left:1042px;
-  top:267px;
-  width:308px;
-  height:26px;
+  left:915px;
+  top:228px;
+  width:279px;
+  height:22px;
   display:flex;
   font-family:'Segoe UI Negreta', 'Segoe UI Normal', 'Segoe UI', sans-serif;
   font-weight:700;
   font-style:normal;
-  font-size:20px;
+  font-size:18px;
   color:#FFFFFF;
   text-align:left;
 }
@@ -1551,8 +1541,8 @@
   position:absolute;
   left:0px;
   top:0px;
-  width:149px;
-  height:30px;
+  width:135px;
+  height:26px;
   background:inherit;
   background-color:rgba(255, 255, 255, 0);
   border:none;
@@ -1563,22 +1553,22 @@
   font-family:'Segoe UI Negreta', 'Segoe UI Normal', 'Segoe UI', sans-serif;
   font-weight:700;
   font-style:normal;
-  font-size:20px;
+  font-size:18px;
   color:#FFFFFF;
   text-align:left;
 }
 #u74 {
   border-width:0px;
   position:absolute;
-  left:1120px;
-  top:226px;
-  width:149px;
-  height:30px;
+  left:986px;
+  top:193px;
+  width:135px;
+  height:26px;
   display:flex;
   font-family:'Segoe UI Negreta', 'Segoe UI Normal', 'Segoe UI', sans-serif;
   font-weight:700;
   font-style:normal;
-  font-size:20px;
+  font-size:18px;
   color:#FFFFFF;
   text-align:left;
 }
@@ -1599,14 +1589,14 @@
   position:absolute;
   left:0px;
   top:0px;
-  width:414px;
-  height:220px;
+  width:376px;
+  height:188px;
   background:inherit;
   background-color:rgba(255, 255, 255, 0);
   background-image:url('../../images/set_start_seoul/u68_div.png');
   background-repeat:no-repeat;
-  background-size:414px 232px;
-  background-position: 0.0px -6.0px;
+  background-size:376px 211px;
+  background-position: 0.0px -11.5px;
   border:none;
   border-radius:0px;
   -moz-box-shadow:none;
@@ -1616,10 +1606,10 @@
 #u75 {
   border-width:0px;
   position:absolute;
-  left:988px;
-  top:0px;
-  width:414px;
-  height:220px;
+  left:866px;
+  top:-1px;
+  width:376px;
+  height:188px;
   display:flex;
 }
 #u75 .text {
