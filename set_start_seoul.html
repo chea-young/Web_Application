@@ -4,6 +4,7 @@
     <title>set_start_seoul</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
     <link href="data/styles.css" type="text/css" rel="stylesheet"/>
     <link href="files/set_start_seoul/styles.css" type="text/css" rel="stylesheet"/>
@@ -156,8 +157,8 @@
       <!-- 경로찾기_bt (Rectangle) -->
       <div id="u47" class="ax_default primary_button ax_default_hidden" data-label="경로찾기_bt" style="display:none; visibility: hidden">
         <div id="u47_div" class=""></div>
-        <div id="u47_text" class="text ">
-          <p><span onclick="change()" >경로 찾기</span></p>
+        <div id="u47_text" onclick="change()" class="text ">
+          <p><span >경로 찾기</span></p>
         </div>
       </div>
 
@@ -217,7 +218,7 @@
         <div id="u56" class="ax_default box_1" data-label="start">
           <div id="u56_div" class=""></div>
           <div id="u56_text" class="text ">
-            <p><input id='u53_data' type="textbox" value="서울역"></p>
+            <p><span id='u53_data' >서울역</span></p>
           </div>
         </div>
 
@@ -225,7 +226,7 @@
         <div id="u57" class="ax_default box_1" data-label="end">
           <div id="u57_div" class=""></div>
           <div id="u57_text" class="text ">
-            <p><input id='u54_data' type="textbox" value="종로3가"></p>
+            <p><span id='u54_data' >종로3가</span></p>
           </div>
         </div>
       </div>
@@ -259,257 +260,301 @@
         </div>
       </div>
     </div>
+    <div id="floating-panel">
+      <input id="submit" type="button" value="Geocode">
+    </div>
+    <div id="map1" style="display:none; visibility: hidden"  ></div>
     <script src="resources/scripts/axure/ios.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRW4jYiIHAQnayCnEwDA3uFwbJFgfThec&signed_in=true&callback=initMap"
+        async defer></script>
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=rpbl1d7siz"></script>
     <script>
-      var position = new naver.maps.LatLng(37.554646,126.9690018); //서울역 현재위치 default값
-      var position1 = new naver.maps.LatLng(37.570226, 126.976920); // 세종대로 사거리 CCTV
-      var position2 = new naver.maps.LatLng(37.569834, 127.002028); // 청계2가 CCTV
+      
+      var position = new naver.maps.LatLng(37.554646,126.9690018);// 광화문? 서울역인거같음..
+      var position1 = new naver.maps.LatLng(37.570226, 126.976920); // 세종대로4거리 cctv
+      var position2 = new naver.maps.LatLng(37.569834, 127.002028); //청계2가
 
       var start_point = 0;
       var end_point = 0;
+      var start_x = 37.554589; //출발지 위도
+      var start_y = 126.969092; //출발지 경도
+      var end_x = 37.570388; //도착지 위도
+      var end_y = 126.992113; //도착지 경도
       function change() {
         console.log('he');
         start_point = document.getElementById("u53_data").innerHTML; //출발지
         end_point = document.getElementById("u54_data").innerHTML; //도착지
         console.log(start_point, end_point);
-        geocodeAddress_start(new google.maps.Geocoder(), map)
-        geocodeAddress_end(new google.maps.Geocoder(), map)
       }
-      
-      var HOME_PATH = window.HOME_PATH || '.';
 
-      var map = new naver.maps.Map('map', {
-        center: position,
-        mapTypeControl: true,
-        zoom: 14,
-        mapTypeControlOptions: {
-          style: naver.maps.MapTypeControlStyle.DROPDOWN
-        }
-      });
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map1'), {
+          zoom: 10,
+          center: {lat: 17.3700, lng: 78.4800}
+        });
+        var geocoder = new google.maps.Geocoder();
 
-      // 출발지 좌표 받아오는부분.
-      function geocodeAddress_start(geocoder, map) {
-        var address = document.getElementById('u53_data').value;
-        geocoder.geocode({'u53_data': address}, function(results, status) {
+        document.getElementById('submit').addEventListener('click', function() {
+          geocodeAddress(geocoder, map);
+        });
+        document.getElementById('u47_text').addEventListener('click', function() {
+          geocodeAddress(geocoder, map);
+        });
+      }
+      function geocodeAddress(geocoder, resultsMap) {
+        geocoder.geocode({'address': start_point}, function(results, status) {
           if (status === google.maps.GeocoderStatus.OK) {
-            var start_x = (results[0].geometry.viewport.Sa.j + results[0].geometry.viewport.Sa.i)/2
-            var start_y = (results[0].geometry.viewport.Wa.j + results[0].geometry.viewport.Wa.i)/2
-            console.log((results[0].geometry.viewport.Sa.j + results[0].geometry.viewport.Sa.i)/2)
-            console.log((results[0].geometry.viewport.Wa.j + results[0].geometry.viewport.Wa.i)/2)
-            var marker_start = new naver.maps.Marker({
-              map: map,
-              position: results[0].geometry.location,
-              icon:{
-                url: './images/start_mark.png',
-                size: new naver.maps.Size(20, 28),
-                origin: new naver.maps.Point(0, 0),
-                anchor: new naver.maps.Point(11,35)
-              }
-            });
+            resultsMap.setCenter(results[0].geometry.location);
+            console.log(start_point);
+            start_x = (results[0].geometry.viewport.Wa.j + results[0].geometry.viewport.Wa.i)/2;//위도
+            start_y = (results[0].geometry.viewport.Sa.j + results[0].geometry.viewport.Sa.i)/2;//경도
+            console.log(start_x, start_y);
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+        geocoder.geocode({'address': end_point}, function(results, status) {
+          if (status === google.maps.GeocoderStatus.OK) {
+            resultsMap.setCenter(results[0].geometry.location);
+            console.log(end_point);
+            end_x = (results[0].geometry.viewport.Wa.j + results[0].geometry.viewport.Wa.i)/2;//위도
+            end_y = (results[0].geometry.viewport.Sa.j + results[0].geometry.viewport.Sa.i)/2;//경도
+            console.log(end_x, end_y)
           } else {
             alert('Geocode was not successful for the following reason: ' + status);
           }
         });
       }
-
-      // 목적지 좌표 받아오는부분.
-      function geocodeAddress_end(geocoder, map) {
-        var address = document.getElementById('u54_data').value;
-        geocoder.geocode({'u54_data': address}, function(results, status) {
-          if (status === google.maps.GeocoderStatus.OK) {
-            var end_x = (results[0].geometry.viewport.Sa.j + results[0].geometry.viewport.Sa.i)/2
-            var end_y = (results[0].geometry.viewport.Wa.j + results[0].geometry.viewport.Wa.i)/2
-            var marker_end = new naver.maps.Marker({
-              map: map,
-              position: results[0].geometry.location,
-              icon:{
-                url: './images/end_mark.png',
-                size: new naver.maps.Size(20, 28),
-                origin: new naver.maps.Point(0, 0),
-                anchor: new naver.maps.Point(11,35)
-              }
-            });
-          } else {
-            alert('Geocode was not successful for the following reason: ' + status);
+      
+      function set_zoom(){
+        var width = start_x-end_x
+        var length = start_y-end_y
+        if(width<0){
+          width = width*(-1)
+        }
+        if(length<0){
+          length = length*(-1)
+        }
+        if(width>length){
+          if (width > 0.025){
+            return 13
+          } else{
+            return 14
           }
+        } else{
+          if (length > 0.025){
+            return 13
+          } else{
+            return 13
+          }
+        }
+      }
+
+		var HOME_PATH = window.HOME_PATH || '.';
+
+		var map = new naver.maps.Map('map', {
+			center: position,
+			mapTypeControl: true,
+			zoom: set_zoom(),
+			mapTypeControlOptions: {
+				style: naver.maps.MapTypeControlStyle.DROPDOWN
+			}
+		});
+
+		var trafficLayer = new naver.maps.TrafficLayer({
+			interval: 300000 // 5분마다 새로고침 (최소값 5분)
+		});
+
+		var btn = $('#traffic');
+
+		naver.maps.Event.addListener(map, 'trafficLayer_changed', function(trafficLayer) {
+			if (trafficLayer) {
+				btn.addClass('control-on');
+				$("#autorefresh").parent().show();
+				$("#autorefresh")[0].checked = true;
+			} else {
+				btn.removeClass('control-on');
+				$("#autorefresh").parent().hide();
+			}
+		});
+
+		btn.on("click", function(e) {
+			e.preventDefault();
+
+			if (trafficLayer.getMap()) {
+				trafficLayer.setMap(null);
+			} else {
+				trafficLayer.setMap(map);
+			}
+		});
+
+		$("#autorefresh").on("click", function(e) {
+			var btn = $(this),
+				checked = btn.is(":checked");
+
+			if (checked) {
+				trafficLayer.startAutoRefresh();
+			} else {
+				trafficLayer.endAutoRefresh();
+			}
+		});
+
+		naver.maps.Event.once(map, 'init_stylemap', function() {
+			trafficLayer.setMap(map);
+		});
+		
+		var contentString = [
+				'<div class="iw_inner">',
+				'   <h3>세종대로 사거리 CCTV</h3>',
+				'   <p><img src="'+ HOME_PATH +'/images/car_accident.jpg" width="200" height="113" alt="" class="thumb" /></p>',
+				'</div>'
+			].join('');
+
+		var markerOptions = {
+			position: position,
+			map: map,
+			icon: {
+				url: './images/CAR1.png',
+				size: new naver.maps.Size(21, 38),
+				origin: new naver.maps.Point(0, 0),
+				anchor: new naver.maps.Point(11, 35)
+			}
+		};
+		var markerOptions1 = {
+			position: position1,
+			map: map,
+			icon: {
+				url: './images/CCTV1.png',
+				size: new naver.maps.Size(29, 29),
+				origin: new naver.maps.Point(0, 0),
+				anchor: new naver.maps.Point(11, 35)
+			}
+		};
+		var markerOptions2 = {
+			position: position2,
+			map: map,
+			icon: {
+				url: './images/CCTV1.png',
+				size: new naver.maps.Size(29, 29),
+				origin: new naver.maps.Point(0, 0),
+				anchor: new naver.maps.Point(11, 35)
+			}
+    };
+    var markerOptions_start = {
+			position: new naver.maps.LatLng(start_x, start_y),
+			map: map,
+			icon: {
+				url: './images/start_mark.png',
+				size: new naver.maps.Size(20, 28),
+				origin: new naver.maps.Point(0, 0),
+				anchor: new naver.maps.Point(11, 35)
+			}
+    };
+    var markerOptions_end = {
+			position: new naver.maps.LatLng(end_x, end_y),
+			map: map,
+			icon: {
+				url: './images/end_mark.png',
+				size: new naver.maps.Size(20, 28),
+				origin: new naver.maps.Point(0, 0),
+				anchor: new naver.maps.Point(11, 35)
+			}
+		};
+
+    var marker_car = new naver.maps.Marker(markerOptions);
+    var marker_cctv1 = new naver.maps.Marker(markerOptions1);
+    var marker_cctv2 = new naver.maps.Marker(markerOptions2);
+    var marker_start = new naver.maps.Marker(markerOptions_start);
+    var marker_end = new naver.maps.Marker(markerOptions_end);
+
+		var infowindow = new naver.maps.InfoWindow({
+			content: contentString
+		});
+
+		naver.maps.Event.addListener(marker_cctv1, "click", function(e) {
+			if (infowindow.getMap()) {
+				infowindow.close();
+			} else {
+				infowindow.open(map, marker_cctv1); // 우선 세종대로사거리 cctv 클릭시 사고사진출력
+			}
+		});
+    //setTimeout(function(){location.reload()}, 30000)
+	</script>
+          <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+    apiKey: "AIzaSyBfLYQieTSNFJVghLmwPidH9eMLJ8sgafA",
+    authDomain: "push-server-56a52.firebaseapp.com",
+    databaseURL: "https://push-server-56a52.firebaseio.com",
+    projectId: "push-server-56a52",
+    storageBucket: "push-server-56a52.appspot.com",
+    messagingSenderId: "967213415011",
+    appId: "AIzaSyBfLYQieTSNFJVghLmwPidH9eMLJ8sgafA",
+    measurementId: "G-MDVS63TX7X"
+};
+    firebase.initializeApp(config);
+ 
+    const messaging = firebase.messaging();
+ 
+    //token값 알아내기
+    messaging.requestPermission()
+        .then(function(){
+            console.log("Have permission");
+            return messaging.getToken();
+        })
+        .then(function(token){
+            console.log(token);
+        })
+        .catch(function(arr){
+            console.log("Error Occured");
         });
-      }
 
-      var trafficLayer = new naver.maps.TrafficLayer({
-        interval: 300000 // 5분마다 새로고침 (최소값 5분)
-      });
-
-      var btn = $('#traffic');
-
-      naver.maps.Event.addListener(map, 'trafficLayer_changed', function(trafficLayer) {
-        if (trafficLayer) {
-          btn.addClass('control-on');
-          $("#autorefresh").parent().show();
-          $("#autorefresh")[0].checked = true;
-        } else {
-          btn.removeClass('control-on');
-          $("#autorefresh").parent().hide();
-        }
-      });
-
-      btn.on("click", function(e) {
-        e.preventDefault();
-
-        if (trafficLayer.getMap()) {
-          trafficLayer.setMap(null);
-        } else {
-          trafficLayer.setMap(map);
-        }
-      });
-
-      $("#autorefresh").on("click", function(e) {
-        var btn = $(this),
-          checked = btn.is(":checked");
-
-        if (checked) {
-          trafficLayer.startAutoRefresh();
-        } else {
-          trafficLayer.endAutoRefresh();
-        }
-      });
-
-      naver.maps.Event.once(map, 'init_stylemap', function() {
-        trafficLayer.setMap(map);
-      });
-      
-      var contentString = [
-          '<div class="iw_inner">',
-          '   <h3>세종대로 사거리 CCTV</h3>',
-          '   <p><img src="'+ HOME_PATH +'/images/car_accident.jpg" width="200" height="113" alt="" class="thumb" /></p>',
-          '</div>'
-        ].join('');
-
-      var markerOptions = {
-        position: position,
-        map: map,
-        icon: {
-          url: './images/CAR1.png',
-          size: new naver.maps.Size(21, 38),
-          origin: new naver.maps.Point(0, 0),
-          anchor: new naver.maps.Point(11, 35)
-        }
-      };
-      var markerOptions1 = {
-        position: position1,
-        map: map,
-        icon: {
-          url: './images/CCTV1.png', //이거 cctv1,2,이런식으로 바꾸는걸로 색상 바꿔야될듯.
-          size: new naver.maps.Size(29, 29),
-          origin: new naver.maps.Point(0, 0),
-          anchor: new naver.maps.Point(11, 35)
-        }
-      };
-      var markerOptions2 = {
-        position: position2,
-        map: map,
-        icon: {
-          url: './images/CCTV1.png',
-          size: new naver.maps.Size(29, 29),
-          origin: new naver.maps.Point(0, 0),
-          anchor: new naver.maps.Point(11, 35)
-        }
-      };
-
-      var marker_car = new naver.maps.Marker(markerOptions);
-      var marker_cctv1 = new naver.maps.Marker(markerOptions1);
-      var marker_cctv2 = new naver.maps.Marker(markerOptions2);
-
-      var infowindow = new naver.maps.InfoWindow({
-        content: contentString
-      });
-
-      naver.maps.Event.addListener(marker_cctv1, "click", function(e) {
-        if (infowindow.getMap()) {
-          infowindow.close();
-        } else {
-          infowindow.open(map, marker_cctv1); // marker들중 하나로 지정해놓으면 그거 클릭시 contentString 보여주는 함수
-        }
-      });
-      
-    </script>
-  <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
-  <script>
-      // Initialize Firebase
-      var config = {
-      apiKey: "AIzaSyBfLYQieTSNFJVghLmwPidH9eMLJ8sgafA",
-      authDomain: "push-server-56a52.firebaseapp.com",
-      databaseURL: "https://push-server-56a52.firebaseio.com",
-      projectId: "push-server-56a52",
-      storageBucket: "push-server-56a52.appspot.com",
-      messagingSenderId: "967213415011",
-      appId: "AIzaSyBfLYQieTSNFJVghLmwPidH9eMLJ8sgafA",
-      measurementId: "G-MDVS63TX7X"
-  };
-      firebase.initializeApp(config);
-  
-      const messaging = firebase.messaging();
-  
-      //token값 알아내기
-      messaging.requestPermission()
-          .then(function(){
-              console.log("Have permission");
-              return messaging.getToken();
-          })
-          .then(function(token){
-              console.log(token);
-          })
-          .catch(function(arr){
-              console.log("Error Occured");
-          });
-
-      messaging.onMessage(function(payload) {
-          document.getElementById("body").innerHTML = payload.data.title;
-          document.getElementById("title").innerHTML = payload.data.body;
-          document.getElementById("cctv_name").innerHTML = payload.data.cctv_name;
-          setTimeout(function() {  
-            document.getElementById("Img").src = 'http://127.0.0.1:8000/media/situation_image/'+payload.data.image_name+'.png';
-            console.log('onMessage: ', payload);
-            check_range(payload.data.cctv_id_x,payload.data.cctv_id_y); // cctv 범위 확인해주는 함수
-            raise_notification(payload.data.cctv_id_x,payload.data.cctv_id_y);
-          }, 3000);
-      });
-      
-      // start_x, start_y 출발지 위도 경도, end_x, end_y 도착지 위도 경도 인지 물어보기
-      //  point1-------point2
-      //   -             -
-      //   -             -
-      //  point3-------point3
-      function check_range(cctv_id_x, cctv_id_y) {
-        var point1, point2, point3, point4 = start_x, end_x, start_y, end_y;
-        var width = (start_x-end_x)/2;
-        if(width < 0){
-          width = width *(-1);
-          point1, point2 = end_x, start_x;
-        }
-        var length = (start_y-end_y)/2;
-        if(length < 0){
-          length = length*(-1);
-          point3, point4 = end_y, start_y;
-        }
-        if (point1-width <= cctv_id_x && cctv_id_x <= point2+width) {
-          if (point3-length <= cctv_id_y && cctv_id_y <= point4-length) {
-            raise_notification()//해당 cctv가 범위안에 있으면 알람 불러주기
-          } //cctv_id를 cctv_x, y 좌표값으로 보내주면 default값 좌표랑 비교해서 수행하려는데
-        } //cctv_id 변수를 어떤식으로 지정하는지 모르겠음, test_x y 대신 payload.data.cctv_x y 이런식으로 받으면 되는지 모르겠음.
-
-      }
-      function raise_notification(){
-        document.getElementById("u87").style.visibility = "visible"
-        document.getElementById("u87").style.display = "block"
-        // cctv 색 바꿔주기
-        setTimeout(function() {  
-          document.getElementById("u87").style.visibility = "hidden"
-          document.getElementById("u87").style.display = "none"
+    messaging.onMessage(function(payload) {
+        document.getElementById("body").innerHTML = payload.data.title;
+        document.getElementById("title").innerHTML = payload.data.body;
+        document.getElementById("cctv_name").innerHTML = payload.data.cctv_name;
+         setTimeout(function() {  
+          document.getElementById("Img").src = 'http://127.0.0.1:8000/media/situation_image/'+payload.data.image_name+'.png';
+          console.log('onMessage: ', payload);
+          check_range(payload.data.cctv_id_x,payload.data.cctv_id_y); // cctv 범위 확인해주는 함수
+          raise_notification(payload.data.cctv_id_x,payload.data.cctv_id_y);
         }, 3000);
+    });
+    
+    // start_x, start_y 출발지 위도 경도, end_x, end_y 도착지 위도 경도 인지 물어보기
+    //  point1-------point2
+    //   -             -
+    //   -             -
+    //  point3-------point3
+    function check_range(cctv_id_x, cctv_id_y) {
+      var point1, point2, point3, point4 = start_x, end_x, start_y, end_y;
+      var width = (start_x-end_x)/2;
+      if(width < 0){
+        width = width *(-1);
+        point1, point2 = end_x, start_x;
       }
-      </script>
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRW4jYiIHAQnayCnEwDA3uFwbJFgfThec&signed_in=true"
-      async defer></script>
+      var length = (start_y-end_y)/2;
+      if(length < 0){
+        length = length*(-1);
+        point3, point4 = end_y, start_y;
+      }
+      if (point1-width <= cctv_id_x && cctv_id_x <= point2+width) {
+        if (point3-length <= cctv_id_y && cctv_id_y <= point4-length) {
+          raise_notification()//해당 cctv가 범위안에 있으면 알람 불러주기
+        } //cctv_id를 cctv_x, y 좌표값으로 보내주면 default값 좌표랑 비교해서 수행하려는데
+      } //cctv_id 변수를 어떤식으로 지정하는지 모르겠음, test_x y 대신 payload.data.cctv_x y 이런식으로 받으면 되는지 모르겠음.
+
+    }
+    function raise_notification(){
+      document.getElementById("u87").style.visibility = "visible"
+      document.getElementById("u87").style.display = "block"
+      // cctv 색 바꿔주기
+      setTimeout(function() {  
+        document.getElementById("u87").style.visibility = "hidden"
+        document.getElementById("u87").style.display = "none"
+      }, 3000);
+    }
+</script>
   </body>
 </html>
