@@ -1,4 +1,4 @@
-﻿﻿<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
   <head>
     <title>map</title>	
@@ -118,16 +118,6 @@
 		var position3 = new naver.maps.LatLng(37.546248,126.987679);
 		var position4 = new naver.maps.LatLng(37.554589,126.969092); //출발지 위치
 		var position5 = new naver.maps.LatLng(37.570388,126.992113); //도착지 위치
-
-		var start_url = "https://www.google.co.kr/maps/search/%EC%84%9C%EC%9A%B8%EC%97%AD/@37.5536387,126.97137,16z/data=!3m1!4b1";
-		var urlData = start_url.substring(start_url.indexOf("@") + 1);
-		var startinfo = urlData.split(','); //startinfo
-		//url에서 prameter 가져오는 방법.
-		
-		//set_start_seoul에서 map4로 div id=u34_text(출발지) 와 div id=u33_text(목적지)값 받아오는 방법 시도중...
-		var test_url = "https://www.google.co.kr/maps/search/"+$('u34_text').html()+"/@37.5536387,126.97137,16z/data=!3m1!4b1";
-		var urlData2 = test_url.substring(test_url.indexOf("@") + 1);
-		var testinfo = urlData2.split(','); //아예 다시 시도해봐야 될듯함. 구글지도 검색 url을 axure로 안보이는 창을 연다음 그 값을 var test_url에 입력하여 시도해봐야될듯.
 
 		var markerOptions = {
 			position: position,
