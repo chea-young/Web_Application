@@ -1,9 +1,10 @@
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html>
   <head>
-    <title>map3</title>
+    <title>map</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
     <link href="data/styles.css" type="text/css" rel="stylesheet"/>
     <link href="files/map3/styles.css" type="text/css" rel="stylesheet"/>
@@ -39,15 +40,65 @@
     <script src="resources/scripts/axure/jquery.nicescroll.min.js"></script>
     <script src="data/document.js"></script>
     <script src="files/map3/data.js"></script>
-    <script type="text/javascript">
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=rpbl1d7siz">
       $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
       $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
       $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
     </script>
+	<style>
+	body{margin:0px;}
+	</style>
   </head>
   <body>
-    <div id="base" class="">
-    </div>
+    <div id="map" style="width: 1395px; height:595px;"></div>
+	<script>
+		var position = new naver.maps.LatLng(37.554646,126.9690018); //서울역 현재위치 default값
+		var position1 = new naver.maps.LatLng(37.570226, 126.976920); // 세종대로 사거리 CCTV
+    var position2 = new naver.maps.LatLng(37.569834, 127.002028); // 청계2가 CCTV
+    
+		var map = new naver.maps.Map('map', {
+			center: position,
+			zoom: 14,
+			mapTypeId: naver.maps.MapTypeId.NORMAL
+		});
+
+		var markerOptions = {
+			position: position,
+			map: map,
+			icon: {
+				url: './images/CAR1.png',
+				size: new naver.maps.Size(21, 38),
+				origin: new naver.maps.Point(0, 0),
+				anchor: new naver.maps.Point(11, 35)
+			}
+		};
+		var markerOptions1 = {
+			position: position1,
+			map: map,
+			icon: {
+				url: './images/CCTV1.png',
+				size: new naver.maps.Size(29, 29),
+				origin: new naver.maps.Point(0, 0),
+				anchor: new naver.maps.Point(11, 35)
+			}
+		};
+		var markerOptions2 = {
+			position: position2,
+			map: map,
+			icon: {
+				url: './images/CCTV1.png',
+				size: new naver.maps.Size(29, 29),
+				origin: new naver.maps.Point(0, 0),
+				anchor: new naver.maps.Point(11, 35)
+			}
+		};
+
+		var marker_car = new naver.maps.Marker(markerOptions);
+		var marker_cctv1 = new naver.maps.Marker(markerOptions1);
+		var marker_cctv2 = new naver.maps.Marker(markerOptions2);
+
+	</script>
+	
     <script src="resources/scripts/axure/ios.js"></script>
   </body>
 </html>
