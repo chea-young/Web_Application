@@ -215,17 +215,17 @@
 
         <!-- start (Rectangle) -->
         <div id="u56" class="ax_default box_1" data-label="start">
-          <div id="u56_div" class=""></div>
-          <div id="u56_text" class="text ">
-            <p><span id='u53_data' >서울역</span></p>
+          <div id="u56_div" style="display:none; visibility: hidden" class=""></div>
+          <div id="u56_text" style="display:none; visibility: hidden" class="text ">
+            <p><span id='u53_data' style="display:none; visibility: hidden" >서울역</span></p>
           </div>
         </div>
 
         <!-- end (Rectangle) -->
         <div id="u57" class="ax_default box_1" data-label="end">
-          <div id="u57_div" class=""></div>
-          <div id="u57_text" class="text ">
-            <p><span id='u54_data' >종로3가역</span></p>
+          <div id="u57_div" style="display:none; visibility: hidden" class=""></div>
+          <div id="u57_text" style="display:none; visibility: hidden" class="text ">
+            <p><span id='u54_data' style="display:none; visibility: hidden" >종로3가역</span></p>
           </div>
         </div>
       </div>
@@ -383,8 +383,8 @@
       var start_y = 126.972646; //출발지 경도
       var end_x = 37.570432; //도착지 위도
       var end_y = 126.9690019; //도착지 경도
-      var 세종대로 = 'CCTV1.png'; //cctv 색 변수로 바꾸기
-      var 청계2가 = 'CCTV1.png'; //cctv 색 변수로 바꾸기
+      var cctv1_color = 'CCTV1.png'; //cctv 색 변수로 바꾸기
+      var cctv2_color = 'CCTV1.png'; //cctv 색 변수로 바꾸기
       function change() {
         console.log('he');
         start_point = document.getElementById("u53_data").innerHTML; //출발지
@@ -434,22 +434,22 @@
       }
 
        function set_zoom(){
-        var width = start_x-end_x
-        var length = start_y-end_y
+        var width = end_x-start_x
+        var length = end_y-start_y
         console.log('확인');
         console.log(start_x, start_y);
         console.log(width, length);
         
-        var center_x = start_x-width/2;
-        var center_y = start_y-length/2;
+        var center_x = start_x+width/2;
+        var center_y = start_y+length/2;
         console.log(center_x,center_y);
         if(width<0){
           width = width*(-1);
-          center_x = end_x-width/2;
+          center_x = end_x+width/2;
         }
         if(length<0){
           length = length*(-1);
-          center_y = end_y-length/2;
+          center_y = end_y+length/2;
         }
         console.log(center_x,center_y);
         position_car  = new naver.maps.LatLng(center_x, center_y);
@@ -533,11 +533,12 @@
           anchor: new naver.maps.Point(11, 35)
         }
       };
+      console.log(cctv1_color,cctv2_color);
       var markerOptions_cctv1 = {
         position: position_cctv1,
         map: map,
         icon: {
-          url: './images/CCTV1.png',
+          url: './images/'+cctv1_color,
           size: new naver.maps.Size(29, 29),
           origin: new naver.maps.Point(0, 0),
           anchor: new naver.maps.Point(11, 35)
@@ -547,14 +548,12 @@
         position: position_cctv2,
         map: map,
         icon: {
-          url: './images/CCTV1.png',
+          url: './images/'+cctv2_color,
           size: new naver.maps.Size(29, 29),
           origin: new naver.maps.Point(0, 0),
           anchor: new naver.maps.Point(11, 35)
         }
       };
-      console.log('마크확인 출발지', start_point);
-      console.log(start_x, start_y);
       var markerOptions_start = {
         position: new naver.maps.LatLng(start_x, start_y),
         map: map,
@@ -622,21 +621,21 @@
 
     messaging.onMessage(function(payload) {
       if(payload.data.type == "acc"){
-        document.getElementById("u79_text").innerHTML = payload.data.title;
-          document.getElementById("u78_text").innerHTML = payload.data.body;
+        document.getElementById("u73_text").innerHTML = payload.data.title;
+          document.getElementById("u72_text").innerHTML = payload.data.body;
           setTimeout(function() {  
-            document.getElementById("u81_div").src = 'http://127.0.0.1:8000/media/situation_image/'+payload.data.image_name+'.png';
-            console.log('onMessage: ', payload);
-            check_range(payload.data.cctv_id_x,payload.data.cctv_id_y,payload.data.type); // cctv 범위 확인해주는 함수
+            document.getElementById("u75_div").src = 'http://127.0.0.1:8000/media/situation_image/'+payload.data.image_name+'.png';
+            console.log('onMessage: acc ', payload);
+            check_range(payload.data.cctv_id_x,payload.data.cctv_id_y,payload.data.type,payload.data.image_name); // cctv 범위 확인해주는 함수
           }, 3000);
 
       }else if(payload.data.type == "ob"){
-          document.getElementById("u72_text").innerHTML = payload.data.title;
-          document.getElementById("u73_text").innerHTML = payload.data.body;
+          document.getElementById("u66_text").innerHTML = payload.data.title;
+          document.getElementById("u65_text").innerHTML = payload.data.body;
           setTimeout(function() {  
-            document.getElementById("u74_div").src = 'http://127.0.0.1:8000/media/situation_image/'+payload.data.image_name+'.png';
-            console.log('onMessage: ', payload);
-            check_range(payload.data.cctv_id_x,payload.data.cctv_id_y,payload.data.type); // cctv 범위 확인해주는 함수
+            document.getElementById("u68_div").src = 'http://127.0.0.1:8000/media/situation_image/'+payload.data.image_name+'.png';
+            console.log('onMessage: ob ', payload);
+            check_range(payload.data.cctv_id_x,payload.data.cctv_id_y,payload.data.type,payload.data.image_name); // cctv 범위 확인해주는 함수
           }, 3000);
 
       }
@@ -647,27 +646,38 @@
     //   -             -
     //   -             -
     //  point3-------point3
-    function check_range(cctv_id_x, cctv_id_y, type) {
-      var point1, point2, point3, point4 = start_x, end_x, start_y, end_y;
-      var width = (start_x-end_x)/2;
+    function check_range(cctv_id_x, cctv_id_y, type, image_name) {
+      console.log('범위 확인',cctv_id_x, cctv_id_y, type);
+      cctv_id_x *=1;
+      cctv_id_y *=1;
+      var point1 = start_x;
+      var point2 = end_x;
+      var point3 = start_y;
+      var point4 =  end_y;
+      console.log(point1, point2, point3, point4)
+      var width = (end_x-start_x)/2;
       if(width < 0){
         width = width *(-1);
-        point1, point2 = end_x, start_x;
+        point1 = end_x;
+        point2 = start_x;
       }
-      var length = (start_y-end_y)/2;
+      var length = (end_y-start_y)/2;
       if(length < 0){
         length = length*(-1);
-        point3, point4 = end_y, start_y;
+        point3 = end_y;
+        point4 = start_y;
       }
-      if (point1-width <= cctv_id_x && cctv_id_x <= point2+width) {
-        if (point3-length <= cctv_id_y && cctv_id_y <= point4-length) {
+      console.log(point1, point2, point3, point4)
+      if (point1 <= cctv_id_x && cctv_id_x <= point2) {
+        if (point3 <= cctv_id_y && cctv_id_y <= point4) {
           raise_notification(type)//해당 cctv가 범위안에 있으면 알람 불러주기
           //alert('hello') if문 돌아가는거 확인. 지워야함.
         } //cctv_id를 cctv_x, y 좌표값으로 보내주면 default값 좌표랑 비교해서 수행하려는데
       } //cctv_id 변수를 어떤식으로 지정하는지 모르겠음, test_x y 대신 payload.data.cctv_x y 이런식으로 받으면 되는지 모르겠음.
 
     }
-    function raise_notification(type){
+    function raise_notification(type, image_name){
+      console.log('알림확인',type)
       if(type == 'acc'){
         document.getElementById("u74_text").style.visibility = "visible"
         document.getElementById("u74_text").style.display = "block"
@@ -695,23 +705,25 @@
           document.getElementById("u70_div").style.visibility = "hidden"
           document.getElementById("u70_div").style.display = "none"
         }, 3000);
-        세종대로 = 'CCTV3.png';
+        cctv1_color = 'CCTV3.png';
+        reset();
         markerOptions1 = {
-			position: position_cctv1,
-			map: map,
-			icon: {
-				url: './images/CCTV3.png',
-				size: new naver.maps.Size(29, 29),
-				origin: new naver.maps.Point(0, 0),
-				anchor: new naver.maps.Point(11, 35)
-			}
-		};
-        var marker = new naver.maps.Marker(markerOptions);
+        position: position_cctv1,
+        map: map,
+        icon: {
+          url: './images/CCTV3.png',
+          size: new naver.maps.Size(29, 29),
+          origin: new naver.maps.Point(0, 0),
+          anchor: new naver.maps.Point(11, 35)
+        }
+      };
+        var marker = new naver.maps.Marker(markerOptions1);
         var contentString_cctv1 = [
           '<div class="iw_inner">',
           '   <h3>세종대로 사거리 CCTV</h3>',
           // '   <p><img src="'http://127.0.0.1:8000/media/situation_image/'+payload.data.image_name+'.png'" width="200" height="113" alt="" class="thumb" /></p>'
           // fcm에서 받아오는 이미지 출력 스트링형태 만들고싶은데 잘 안되네
+          //"http://127.0.0.1:8000/media/situation_image/'+payload.data.image_name+'.png"
           '   <p><img src="'+ HOME_PATH +'/images/car_accident.jpg" width="200" height="113" alt="" class="thumb" /></p>',
           '</div>'
         ].join('');
@@ -753,7 +765,8 @@
           document.getElementById("u63_div").style.visibility = "hidden"
           document.getElementById("u63_div").style.display = "none"
         }, 3000);
-        청계2가 = 'CCTV3.png';
+        cctv2_color = 'CCTV3.png';
+        reset();
         markerOptions3 = {
           position: position_cctv2,
           map: map,
