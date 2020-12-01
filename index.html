@@ -378,10 +378,11 @@
 
       var start_point = 0;
       var end_point = 0;
-      var start_x; //출발지 위도
-      var start_y; //출발지 경도
-      var end_x; //도착지 위도
-      var end_y; //도착지 경도
+
+      var start_x = 37.55301699999999; //출발지 위도
+      var start_y = 126.972646; //출발지 경도
+      var end_x = 37.570432; //도착지 위도
+      var end_y = 126.9690019; //도착지 경도
       var 세종대로 = 'CCTV1.png'; //cctv 색 변수로 바꾸기
       var 청계2가 = 'CCTV1.png'; //cctv 색 변수로 바꾸기
       function change() {
@@ -390,6 +391,7 @@
         end_point = document.getElementById("u54_data").innerHTML; //도착지
         console.log(start_point, end_point);
       }
+
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map1'), {
           zoom: 10,
@@ -412,6 +414,7 @@
             start_x = (results[0].geometry.viewport.Wa.j + results[0].geometry.viewport.Wa.i)/2;//위도
             start_y = (results[0].geometry.viewport.Sa.j + results[0].geometry.viewport.Sa.i)/2;//경도
             console.log(start_x, start_y);
+            reset()
           } else {
             alert('Geocode was not successful for the following reason: ' + status);
           }
@@ -423,145 +426,163 @@
             end_x = (results[0].geometry.viewport.Wa.j + results[0].geometry.viewport.Wa.i)/2;//위도
             end_y = (results[0].geometry.viewport.Sa.j + results[0].geometry.viewport.Sa.i)/2;//경도
             console.log(end_x, end_y)
+            reset()
           } else {
             alert('Geocode was not successful for the following reason: ' + status);
           }
         });
       }
+
        function set_zoom(){
         var width = start_x-end_x
         var length = start_y-end_y
+        console.log('확인');
+        console.log(start_x, start_y);
+        console.log(width, length);
+        
+        var center_x = start_x-width/2;
+        var center_y = start_y-length/2;
+        console.log(center_x,center_y);
         if(width<0){
-          width = width*(-1)
+          width = width*(-1);
+          center_x = end_x-width/2;
         }
         if(length<0){
-          length = length*(-1)
+          length = length*(-1);
+          center_y = end_y-length/2;
         }
+        console.log(center_x,center_y);
+        position_car  = new naver.maps.LatLng(center_x, center_y);
         if(width>length){
           if (width > 0.025){
-            return 13
+            return 13;
           } else{
-            return 14
+            return 14;
           }
         } else{
           if (length > 0.025){
-            return 13
+            return 13;
           } else{
-            return 14
+            return 14;
           }
         }
       }
 
-		var HOME_PATH = window.HOME_PATH || '.';
+    function reset(){
 
-		var map = new naver.maps.Map('map', {
-			center: position_car,
-			mapTypeControl: true,
-			zoom: set_zoom(),
-			mapTypeControlOptions: {
-				style: naver.maps.MapTypeControlStyle.DROPDOWN
-			}
-		});
+      var HOME_PATH = window.HOME_PATH || '.';
 
-		var trafficLayer = new naver.maps.TrafficLayer({
-			interval: 300000 // 5분마다 새로고침 (최소값 5분)
-		});
+      var map = new naver.maps.Map('map', {
+        center: position_car,
+        mapTypeControl: true,
+        zoom: set_zoom(),
+        mapTypeControlOptions: {
+          style: naver.maps.MapTypeControlStyle.DROPDOWN
+        }
+      });
 
-		var btn = $('#traffic');
+      var trafficLayer = new naver.maps.TrafficLayer({
+        interval: 300000 // 5분마다 새로고침 (최소값 5분)
+      });
 
-		naver.maps.Event.addListener(map, 'trafficLayer_changed', function(trafficLayer) {
-			if (trafficLayer) {
-				btn.addClass('control-on');
-				$("#autorefresh").parent().show();
-				$("#autorefresh")[0].checked = true;
-			} else {
-				btn.removeClass('control-on');
-				$("#autorefresh").parent().hide();
-			}
-		});
+      var btn = $('#traffic');
 
-		btn.on("click", function(e) {
-			e.preventDefault();
+      naver.maps.Event.addListener(map, 'trafficLayer_changed', function(trafficLayer) {
+        if (trafficLayer) {
+          btn.addClass('control-on');
+          $("#autorefresh").parent().show();
+          $("#autorefresh")[0].checked = true;
+        } else {
+          btn.removeClass('control-on');
+          $("#autorefresh").parent().hide();
+        }
+      });
 
-			if (trafficLayer.getMap()) {
-				trafficLayer.setMap(null);
-			} else {
-				trafficLayer.setMap(map);
-			}
-		});
+      btn.on("click", function(e) {
+        e.preventDefault();
 
-		$("#autorefresh").on("click", function(e) {
-			var btn = $(this),
-				checked = btn.is(":checked");
+        if (trafficLayer.getMap()) {
+          trafficLayer.setMap(null);
+        } else {
+          trafficLayer.setMap(map);
+        }
+      });
 
-			if (checked) {
-				trafficLayer.startAutoRefresh();
-			} else {
-				trafficLayer.endAutoRefresh();
-			}
-		});
+      $("#autorefresh").on("click", function(e) {
+        var btn = $(this),
+          checked = btn.is(":checked");
 
-		naver.maps.Event.once(map, 'init_stylemap', function() {
-			trafficLayer.setMap(map);
-		});
+        if (checked) {
+          trafficLayer.startAutoRefresh();
+        } else {
+          trafficLayer.endAutoRefresh();
+        }
+      });
 
-		var markerOptions_car = {
-			position: position_car,
-			map: map,
-			icon: {
-				url: './images/CAR1.png',
-				size: new naver.maps.Size(21, 38),
-				origin: new naver.maps.Point(0, 0),
-				anchor: new naver.maps.Point(11, 35)
-			}
-		};
-		var markerOptions_cctv1 = {
-			position: position_cctv1,
-			map: map,
-			icon: {
-				url: './images/CCTV1.png',
-				size: new naver.maps.Size(29, 29),
-				origin: new naver.maps.Point(0, 0),
-				anchor: new naver.maps.Point(11, 35)
-			}
-		};
-		var markerOptions_cctv2 = {
-			position: position_cctv2,
-			map: map,
-			icon: {
-				url: './images/CCTV1.png',
-				size: new naver.maps.Size(29, 29),
-				origin: new naver.maps.Point(0, 0),
-				anchor: new naver.maps.Point(11, 35)
-			}
-    };
-    var markerOptions_start = {
-			position: new naver.maps.LatLng(start_x, start_y),
-			map: map,
-			icon: {
-				url: './images/start_mark.png',
-				size: new naver.maps.Size(20, 28),
-				origin: new naver.maps.Point(0, 0),
-				anchor: new naver.maps.Point(11, 35)
-			}
-    };
-    var markerOptions_end = {
-			position: new naver.maps.LatLng(end_x, end_y),
-			map: map,
-			icon: {
-				url: './images/end_mark.png',
-				size: new naver.maps.Size(20, 28),
-				origin: new naver.maps.Point(0, 0),
-				anchor: new naver.maps.Point(11, 35)
-			}
-		};
+      naver.maps.Event.once(map, 'init_stylemap', function() {
+        trafficLayer.setMap(map);
+      });
 
-    var marker_car = new naver.maps.Marker(markerOptions_car);
-    var marker_cctv1 = new naver.maps.Marker(markerOptions_cctv1);
-    var marker_cctv2 = new naver.maps.Marker(markerOptions_cctv2);
-    var marker_start = new naver.maps.Marker(markerOptions_start);
-    var marker_end = new naver.maps.Marker(markerOptions_end);
+      var markerOptions_car = {
+        position: position_car,
+        map: map,
+        icon: {
+          url: './images/CAR1.png',
+          size: new naver.maps.Size(21, 38),
+          origin: new naver.maps.Point(0, 0),
+          anchor: new naver.maps.Point(11, 35)
+        }
+      };
+      var markerOptions_cctv1 = {
+        position: position_cctv1,
+        map: map,
+        icon: {
+          url: './images/CCTV1.png',
+          size: new naver.maps.Size(29, 29),
+          origin: new naver.maps.Point(0, 0),
+          anchor: new naver.maps.Point(11, 35)
+        }
+      };
+      var markerOptions_cctv2 = {
+        position: position_cctv2,
+        map: map,
+        icon: {
+          url: './images/CCTV1.png',
+          size: new naver.maps.Size(29, 29),
+          origin: new naver.maps.Point(0, 0),
+          anchor: new naver.maps.Point(11, 35)
+        }
+      };
+      console.log('마크확인 출발지', start_point);
+      console.log(start_x, start_y);
+      var markerOptions_start = {
+        position: new naver.maps.LatLng(start_x, start_y),
+        map: map,
+        icon: {
+          url: './images/start_mark.png',
+          size: new naver.maps.Size(20, 28),
+          origin: new naver.maps.Point(0, 0),
+          anchor: new naver.maps.Point(11, 35)
+        }
+      };
 
+      var markerOptions_end = {
+        position: new naver.maps.LatLng(end_x, end_y),
+        map: map,
+        icon: {
+          url: './images/end_mark.png',
+          size: new naver.maps.Size(20, 28),
+          origin: new naver.maps.Point(0, 0),
+          anchor: new naver.maps.Point(11, 35)
+        }
+      };
+
+      var marker_car = new naver.maps.Marker(markerOptions_car);
+      var marker_cctv1 = new naver.maps.Marker(markerOptions_cctv1);
+      var marker_cctv2 = new naver.maps.Marker(markerOptions_cctv2);
+      var marker_start = new naver.maps.Marker(markerOptions_start);
+      var marker_end = new naver.maps.Marker(markerOptions_end);
+    }
     //setTimeout(function(){location.reload()}, 30000)
 
 		//setTimeout(function(){location.reload()}, 10000) //화면 재실행 이런식으로 현재위치 갱신하려함.
@@ -744,7 +765,9 @@
           }
         };
         var marker = new naver.maps.Marker(markerOptions3);
-        var contentString_cctv2 = [
+        
+      }// cctv 색 바꿔주기
+      var contentString_cctv2 = [
         '<div class="iw_inner">',
         '   <h3>세종대로 사거리 CCTV</h3>',
         // '   <p><img src="'http://127.0.0.1:8000/media/situation_image/'+payload.data.image_name+'.png'" width="200" height="113" alt="" class="thumb" /></p>'
@@ -762,8 +785,6 @@
           infowindow.open(map, marker);
         }
       }); //cctv클릭시 사고사진 출력
-      }// cctv 색 바꿔주기
-      
     }
 </script>
   </body>
