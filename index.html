@@ -455,15 +455,19 @@
         position_car  = new naver.maps.LatLng(center_x, center_y);
         if(width>length){
           if (width > 0.025){
-            return 13;
+            console.log('in1');
+            return 14;
           } else{
+            console.log('in2');
             return 14;
           }
         } else{
           if (length > 0.025){
+            console.log('in3');
             return 13;
           } else{
-            return 14;
+            console.log('in4');
+            return 15;
           }
         }
       }
@@ -591,6 +595,8 @@
     
     var test_x = 37.5655;
     var test_y = 126.97;
+    var cctv1_image;
+    var cctv2_image;
     // Initialize Firebase
     var config = {
     apiKey: "AIzaSyBfLYQieTSNFJVghLmwPidH9eMLJ8sgafA",
@@ -624,7 +630,7 @@
         document.getElementById("u73_text").innerHTML = payload.data.title;
           document.getElementById("u72_text").innerHTML = payload.data.body;
           setTimeout(function() {  
-            document.getElementById("u75_div").src = 'http://127.0.0.1:8000/media/situation_image/'+payload.data.image_name+'.png';
+            document.getElementById("u75_div").src = 'http://chaeyoung.pythonanywhere.com/situation_image/'+payload.data.image_name+'.png';
             console.log('onMessage: acc ', payload);
             check_range(payload.data.cctv_id_x,payload.data.cctv_id_y,payload.data.type,payload.data.image_name); // cctv 범위 확인해주는 함수
           }, 3000);
@@ -633,7 +639,7 @@
           document.getElementById("u66_text").innerHTML = payload.data.title;
           document.getElementById("u65_text").innerHTML = payload.data.body;
           setTimeout(function() {  
-            document.getElementById("u68_div").src = 'http://127.0.0.1:8000/media/situation_image/'+payload.data.image_name+'.png';
+            document.getElementById("u68_div").src = 'http://chaeyoung.pythonanywhere.com/situation_image/'+payload.data.image_name+'.png';
             console.log('onMessage: ob ', payload);
             check_range(payload.data.cctv_id_x,payload.data.cctv_id_y,payload.data.type,payload.data.image_name); // cctv 범위 확인해주는 함수
           }, 3000);
@@ -723,8 +729,8 @@
           '   <h3>세종대로 사거리 CCTV</h3>',
           // '   <p><img src="'http://127.0.0.1:8000/media/situation_image/'+payload.data.image_name+'.png'" width="200" height="113" alt="" class="thumb" /></p>'
           // fcm에서 받아오는 이미지 출력 스트링형태 만들고싶은데 잘 안되네
-          //"http://127.0.0.1:8000/media/situation_image/'+payload.data.image_name+'.png"
-          '   <p><img src="'+ HOME_PATH +'/images/car_accident.jpg" width="200" height="113" alt="" class="thumb" /></p>',
+          //"http://chaeyoung.pythonanywhere.com/situation_image/'+payload.data.image_name+'.png"
+          '   <p><img src="'+'http://chaeyoung.pythonanywhere.com/situation_image/'+image_name +'.png" width="200" height="113" alt="" class="thumb" /></p>',
           '</div>'
         ].join('');
         var infowindow = new naver.maps.InfoWindow({
