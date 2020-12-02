@@ -304,6 +304,7 @@
 
         <!-- 89 1 (Rectangle) -->
         <div id="u68" class="ax_default shape" data-label="89 1">
+          <img id="u68_image" style="display:none; visibility: hidden" src='http://chaeyoung.pythonanywhere.com/media/situation_image/1212132115.png' width="414" height="232">
           <div id="u68_div" style="display:none; visibility: hidden" class=""></div>
           <div id="u68_text" class="text " style="display:none; visibility: hidden">
             <p></p>
@@ -355,10 +356,11 @@
         </div>
 
         <!-- 89 1 (Rectangle) -->
-        <div id="u75" class="ax_default shape" data-label="89 1">
-          <div id="u75_div" style="display:none; visibility: hidden" class=""></div>
-          <div id="u75_text" class="text " style="display:none; visibility: hidden">
-            <p></p>
+        <div id="u75"  class="ax_default shape" data-label="89 1">
+        <img id="u75_image" style="display:none; visibility: hidden" src='http://chaeyoung.pythonanywhere.com/media/situation_image/121213710.png' width="414" height="232">
+          <div id="u75_div" style="display:none; visibility: hidden"  class=""></div>
+          <div id="u75_text"  class="text " style="display:none; visibility: hidden">
+            <p  ></p>
           </div>
         </div>
       </div>
@@ -595,8 +597,8 @@
     
     var test_x = 37.5655;
     var test_y = 126.97;
-    var cctv1_image;
-    var cctv2_image;
+    var cctv1_image = 1;
+    var cctv2_image =1;
     // Initialize Firebase
     var config = {
     apiKey: "AIzaSyBfLYQieTSNFJVghLmwPidH9eMLJ8sgafA",
@@ -630,8 +632,10 @@
         document.getElementById("u73_text").innerHTML = payload.data.title;
           document.getElementById("u72_text").innerHTML = payload.data.body;
           setTimeout(function() {  
-            document.getElementById("u75_div").src = 'http://chaeyoung.pythonanywhere.com/situation_image/'+payload.data.image_name+'.png';
+            document.getElementById("u75_image").src = 'http://chaeyoung.pythonanywhere.com/media/situation_image/'+payload.data.image_name+'.png';
+            //http://chaeyoung.pythonanywhere.com/media/situation_image/1212132115.png
             console.log('onMessage: acc ', payload);
+            //cctv1_image = payload.data.image_name;
             check_range(payload.data.cctv_id_x,payload.data.cctv_id_y,payload.data.type,payload.data.image_name); // cctv 범위 확인해주는 함수
           }, 3000);
 
@@ -639,8 +643,9 @@
           document.getElementById("u66_text").innerHTML = payload.data.title;
           document.getElementById("u65_text").innerHTML = payload.data.body;
           setTimeout(function() {  
-            document.getElementById("u68_div").src = 'http://chaeyoung.pythonanywhere.com/situation_image/'+payload.data.image_name+'.png';
+            document.getElementById("u68_image").src = 'http://chaeyoung.pythonanywhere.com/media/situation_image/'+payload.data.image_name+'.png';
             console.log('onMessage: ob ', payload);
+            //cctv2_image = payload.data.image_name;
             check_range(payload.data.cctv_id_x,payload.data.cctv_id_y,payload.data.type,payload.data.image_name); // cctv 범위 확인해주는 함수
           }, 3000);
 
@@ -691,8 +696,8 @@
         document.getElementById("u73_text").style.display = "block"
         document.getElementById("u72_text").style.visibility = "visible"
         document.getElementById("u72_text").style.display = "block"
-        document.getElementById("u75_div").style.visibility = "visible"
-        document.getElementById("u75_div").style.display = "block"
+        document.getElementById("u75_image").style.visibility = "visible"
+        document.getElementById("u75_image").style.display = "block"
         document.getElementById("u71_div").style.visibility = "visible"
         document.getElementById("u71_div").style.display = "block"
         document.getElementById("u70_div").style.visibility = "visible"
@@ -704,8 +709,8 @@
           document.getElementById("u73_text").style.display = "none"
           document.getElementById("u72_text").style.visibility = "hidden"
           document.getElementById("u72_text").style.display = "none"
-          document.getElementById("u75_div").style.visibility = "hidden"
-          document.getElementById("u75_div").style.display = "none"
+          document.getElementById("u75_image").style.visibility = "hidden"
+          document.getElementById("u75_image").style.display = "none"
           document.getElementById("u71_div").style.visibility = "hidden"
           document.getElementById("u71_div").style.display = "none"
           document.getElementById("u70_div").style.visibility = "hidden"
@@ -730,7 +735,7 @@
           // '   <p><img src="'http://127.0.0.1:8000/media/situation_image/'+payload.data.image_name+'.png'" width="200" height="113" alt="" class="thumb" /></p>'
           // fcm에서 받아오는 이미지 출력 스트링형태 만들고싶은데 잘 안되네
           //"http://chaeyoung.pythonanywhere.com/situation_image/'+payload.data.image_name+'.png"
-          '   <p><img src="'+'http://chaeyoung.pythonanywhere.com/situation_image/'+image_name +'.png" width="200" height="113" alt="" class="thumb" /></p>',
+          '   <p><img src="http://chaeyoung.pythonanywhere.com/media/situation_image/121213710.png" width="200" height="113" alt="" class="thumb" /></p>',
           '</div>'
         ].join('');
         var infowindow = new naver.maps.InfoWindow({
@@ -751,8 +756,8 @@
         document.getElementById("u66_text").style.display = "block"
         document.getElementById("u65_text").style.visibility = "visible"
         document.getElementById("u65_text").style.display = "block"
-        document.getElementById("u68_div").style.visibility = "visible"
-        document.getElementById("u68_div").style.display = "block"
+        document.getElementById("u68_image").style.visibility = "visible"
+        document.getElementById("u68_image").style.display = "block"
         document.getElementById("u64_div").style.visibility = "visible"
         document.getElementById("u64_div").style.display = "block"
         document.getElementById("u63_div").style.visibility = "visible"
@@ -764,8 +769,8 @@
           document.getElementById("u66_text").style.display = "none"
           document.getElementById("u65_text").style.visibility = "hidden"
           document.getElementById("u65_text").style.display = "none"
-          document.getElementById("u68_div").style.visibility = "hidden"
-          document.getElementById("u68_div").style.display = "none"
+          document.getElementById("u68_image").style.visibility = "hidden"
+          document.getElementById("u68_image").style.display = "none"
           document.getElementById("u64_div").style.visibility = "hidden"
           document.getElementById("u64_div").style.display = "none"
           document.getElementById("u63_div").style.visibility = "hidden"
@@ -791,7 +796,7 @@
         '   <h3>세종대로 사거리 CCTV</h3>',
         // '   <p><img src="'http://127.0.0.1:8000/media/situation_image/'+payload.data.image_name+'.png'" width="200" height="113" alt="" class="thumb" /></p>'
         // fcm에서 받아오는 이미지 출력 만들고싶은데 잘 안되네
-        '   <p><img src="'+ HOME_PATH +'/images/car_accident.jpg" width="200" height="113" alt="" class="thumb" /></p>',
+        '   <p><img src="http://chaeyoung.pythonanywhere.com/media/situation_image/121213710.png" width="200" height="113" alt="" class="thumb" /></p>',,
         '</div>'
       ].join('');
       var infowindow = new naver.maps.InfoWindow({
