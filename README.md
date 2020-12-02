@@ -16,3 +16,5 @@
     - FCM 알림을 수신시 해당 사고 위치&사진 정보를 저장
     - 알림 리스트 버튼을 클릭시 수신받은 교통상황 정보 제공
         + 지도 api의 교통상황은 최소 5분에 한번 갱신 되는 것을 어떻게 표현해야 될지 잘 모르겠음...
+        
+        #e02A3b7dMwA:APA91bHMhP-TJsOfdjZksVXFBh9kEoLZ80a_kl0RooWsa7t1K5gE5zHlepZZPeeY7sz_JGoGwto-Az59jh1Kbrr_49PQmF7bPeM8ctuo3a01AG1jszik98eHThp3nw65Bnumr7-J-E_Y
