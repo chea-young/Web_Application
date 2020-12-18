@@ -1,4 +1,4 @@
-﻿body {
+body {
   margin:0px;
   background-image:none;
   position:relative;
@@ -1015,50 +1015,38 @@
   position:absolute;
   left:0px;
   top:0px;
-  width:149px;
-  height:34px;
+  width:165px;
+  height:60px;
   background:inherit;
-  background-color:rgba(255, 255, 255, 0);
-  border:none;
+  background-color:rgba(255, 255, 255, 1);
+  box-sizing:border-box;
+  border-width:1px;
+  border-style:solid;
+  border-color:rgba(121, 121, 121, 1);
   border-radius:0px;
   -moz-box-shadow:none;
   -webkit-box-shadow:none;
   box-shadow:none;
-  font-family:'Segoe UI Semilight', 'Segoe UI Normal', 'Segoe UI', sans-serif;
-  font-weight:350;
-  font-style:normal;
-  font-size:36px;
-  color:#FFFFFF;
-  text-align:left;
 }
 #u60 {
   border-width:0px;
   position:absolute;
-  left:626px;
-  top:543px;
-  width:149px;
-  height:34px;
+  left:1427px;
+  top:98px;
+  width:165px;
+  height:60px;
   display:flex;
-  font-family:'Segoe UI Semilight', 'Segoe UI Normal', 'Segoe UI', sans-serif;
-  font-weight:350;
-  font-style:normal;
-  font-size:36px;
-  color:#FFFFFF;
-  text-align:left;
 }
 #u60 .text {
   position:absolute;
-  align-self:flex-end;
-  padding:0px 0px 0px 0px;
+  align-self:center;
+  padding:2px 2px 2px 2px;
   box-sizing:border-box;
   width:100%;
 }
 #u60_text {
   border-width:0px;
   word-wrap:break-word;
-  text-shadow:2px 4px 4px rgba(0, 0, 0, 0.250980392156863);
-  -webkit-text-shadow:2px 4px 4px rgba(0, 0, 0, 0.250980392156863);
-  -moz-text-shadow:2px 4px 4px rgba(0, 0, 0, 0.250980392156863);
   text-transform:none;
 }
 #u61_img {
@@ -1134,7 +1122,6 @@
   border-width:0px;
   word-wrap:break-word;
   text-transform:none;
-  visibility:hidden;
 }
 #u64_div {
   border-width:0px;
@@ -1220,6 +1207,7 @@
   border-width:0px;
   word-wrap:break-word;
   text-transform:none;
+  visibility:hidden;
 }
 #u66_div {
   border-width:0px;
@@ -1235,8 +1223,8 @@
   -moz-box-shadow:none;
   -webkit-box-shadow:none;
   box-shadow:none;
-  font-family:'Segoe UI Negreta', 'Segoe UI Normal', 'Segoe UI', sans-serif;
-  font-weight:700;
+  font-family:'Segoe UI Semilight', 'Segoe UI Normal', 'Segoe UI', sans-serif;
+  font-weight:350;
   font-style:normal;
   font-size:18px;
   color:#FFFFFF;
@@ -1250,8 +1238,8 @@
   width:277px;
   height:22px;
   display:flex;
-  font-family:'Segoe UI Negreta', 'Segoe UI Normal', 'Segoe UI', sans-serif;
-  font-weight:700;
+  font-family:'Segoe UI Semilight', 'Segoe UI Normal', 'Segoe UI', sans-serif;
+  font-weight:350;
   font-style:normal;
   font-size:18px;
   color:#FFFFFF;
@@ -1267,6 +1255,9 @@
 #u66_text {
   border-width:0px;
   word-wrap:break-word;
+  text-shadow:2px 4px 4px rgba(0, 0, 0, 0.250980392156863);
+  -webkit-text-shadow:2px 4px 4px rgba(0, 0, 0, 0.250980392156863);
+  -moz-text-shadow:2px 4px 4px rgba(0, 0, 0, 0.250980392156863);
   text-transform:none;
 }
 #u67_div {
