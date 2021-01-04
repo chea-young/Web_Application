@@ -1,18 +1,25 @@
 # Website
 
+## 가상의 CCTV 위치
+- 1번 광화문 사거리 CCTV => 37.570226, 126.976920
+- 2번 청계2가 CCTV => 37.569834, 127.002028
+
+## 웹 애플리케이션 순서도
+
+## 웹 애플리케이션 설명
+
+## Repository 파일 설명
+
+
+### 추가적으로 개발하면 좋을 점 & 수정 점
+- 사고 후 클릭 시 CCTV 보이게 하기
+- 시작화면에서 GPS로 사용자 위치 센싱
+- 사용자 위치에서 5km 내에 있으면 알림
+- 두 번 클릭이 아니더라도 출발지, 목적지 마크 
+- zoom 사이즈 조절
 ## netlify로 web hosting
 네이버 지도 api 사용시 웹 url 적용, 해당 url에서 api 사용 가능   
 현재 iceboat.netlify.app iceboat.netlify.app/set_start_seoul.html iceboat.netlify.app/set_start_busan.html 127.0.0.1 등록   
 도메인 변경시 지도 api url 변경 필요.
 
-## 수정점
-* set_start_seoul & set_start_busan
-    - 시연시 서울과 부산 위치 고정하기 위해 만듬   
-    - map3,4 => 서울 큰화면, 작은화면   
-    - map5,6 => 부산 큰화면, 작은화면   
-    - 위치 및 CCTV default 값 설정필요.
-* 차별점 제시 방안
-    - 현재 위치 갱신 버튼을 알림 리스트 버튼(?)으로 수정
-    - FCM 알림을 수신시 해당 사고 위치&사진 정보를 저장
-    - 알림 리스트 버튼을 클릭시 수신받은 교통상황 정보 제공
-        + 지도 api의 교통상황은 최소 5분에 한번 갱신 되는 것을 어떻게 표현해야 될지 잘 모르겠음...
+### 참고한 사이트

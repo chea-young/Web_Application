@@ -438,13 +438,9 @@
        function set_zoom(){
         var width = end_x-start_x
         var length = end_y-start_y
-        console.log('확인');
-        console.log(start_x, start_y);
-        console.log(width, length);
         
         var center_x = start_x+width/2;
         var center_y = start_y+length/2;
-        console.log(center_x,center_y);
         if(width<0){
           width = width*(-1);
           center_x = end_x+width/2;
@@ -454,8 +450,17 @@
           center_y = end_y+length/2;
         }
         console.log(center_x,center_y);
+        console.log('확인',width, length);
+        max_num = Math.max(width, length);
         position_car  = new naver.maps.LatLng(center_x, center_y);
-        if(width>length){
+        if (max_num >0.019){
+          console.log('in1');
+          return 14
+        }else {
+          console.log('in2');
+          return 15
+        }
+        /*if(width>length){
           if (width > 0.025){
             console.log('in1');
             return 14;
@@ -471,7 +476,7 @@
             console.log('in4');
             return 15;
           }
-        }
+        }*/
       }
 
     function reset(){

@@ -29,7 +29,7 @@ function geocodeAddress(geocoder, resultsMap) {
     if (status === google.maps.GeocoderStatus.OK) {
       resultsMap.setCenter(results[0].geometry.location);
       console.log((results[0].geometry.viewport.Wa.j + results[0].geometry.viewport.Wa.i)/2)//위도
-      console.log((results[0].geometry.viewport.Sa.j + results[0].geometry.viewport.Sa.i)/2)//경도
+      console.log((results[0].geometry.viewport.Ra.j + results[0].geometry.viewport.Ra.i)/2)//경도
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
     }
