@@ -413,8 +413,9 @@
           if (status === google.maps.GeocoderStatus.OK) {
             resultsMap.setCenter(results[0].geometry.location);
             console.log(start_point);
-            start_x = (results[0].geometry.viewport.Wa.j + results[0].geometry.viewport.Wa.i)/2;//위도
-            start_y = (results[0].geometry.viewport.Ra.j + results[0].geometry.viewport.Ra.i)/2;//경도
+            console.log(results[0].geometry.viewport);
+            start_x = (results[0].geometry.viewport.Va.j + results[0].geometry.viewport.Va.i)/2;//위도
+            start_y = (results[0].geometry.viewport.Qa.j + results[0].geometry.viewport.Qa.i)/2;//경도
             console.log(start_x, start_y);
             reset()
           } else {
@@ -425,8 +426,8 @@
           if (status === google.maps.GeocoderStatus.OK) {
             resultsMap.setCenter(results[0].geometry.location);
             console.log(end_point);
-            end_x = (results[0].geometry.viewport.Wa.j + results[0].geometry.viewport.Wa.i)/2;//위도
-            end_y = (results[0].geometry.viewport.Ra.j + results[0].geometry.viewport.Ra.i)/2;//경도
+            end_x = (results[0].geometry.viewport.Va.j + results[0].geometry.viewport.Va.i)/2;//위도
+            end_y = (results[0].geometry.viewport.Qa.j + results[0].geometry.viewport.Qa.i)/2;//경도
             console.log(end_x, end_y)
             reset()
           } else {
