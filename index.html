@@ -160,7 +160,7 @@
       <div id="u47" class="ax_default primary_button ax_default_hidden" data-label="경로찾기_bt" style="display:none; visibility: hidden">
         <div id="u47_div" class=""></div>
         <div id="u47_text"  onclick="change()" class="text ">
-          <p><span>Find Paths</span></p>
+          <p><span>Enter</span></p>
         </div>
       </div>
 
@@ -189,7 +189,7 @@
         <div id="u52" class="ax_default shape">
           <div id="u52_div" class=""></div>
           <div id="u52_text" class="text ">
-            <p><span>CCTV Status</span></p>
+            <p><span>CCTV 정보</span></p>
           </div>
         </div>
       </div>
@@ -209,7 +209,7 @@
         <div id="u55" class="ax_default shape">
           <div id="u55_div" class=""></div>
           <div id="u55_text" class="text ">
-            <p><span>Find Path</span></p>
+            <p><span>경로 찾기</span></p>
           </div>
         </div>
 
@@ -245,7 +245,7 @@
         <div id="u60" class="ax_default shape">
           <div id="u60_div" class=""></div>
           <div id="u60_text" class="text ">
-            <p><span>Calcel Path</span></p>
+            <p><span>경로 취소</span></p>
           </div>
         </div>
       </div>
@@ -369,14 +369,15 @@
       <input id="submit" type="button" value="Geocode">
     </div>
     <div id="map1" style="display:none; visibility: hidden"  ></div>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRW4jYiIHAQnayCnEwDA3uFwbJFgfThec&signed_in=true&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRR9w1Z7KQddnMwfrFIsJqUpmvbw-wNC4&signed_in=true&callback=initMap"
         async defer></script>
     <script src="resources/scripts/axure/ios.js"></script>
       <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=rpbl1d7siz"></script>
     <script>
       var position_car = new naver.maps.LatLng(37.554646,126.9690018);// 광화문? 서울역인거같음..
-      var position_cctv1 = new naver.maps.LatLng(37.570226, 126.976920); // 세종대로4거리 cctv
-      var position_cctv2 = new naver.maps.LatLng(37.569834, 127.002028); //청계2가
+      var position_cctv1 = new naver.maps.LatLng(37.522583, 126.961311); // 세종대로4거리 cctv
+      var position_cctv2 = new naver.maps.LatLng(37.515105, 126.996357); //청계2가
+      //var position_cctv3 = new naver.maps.LatLng(37.569834, 127.002028); //청계2가
 
       var start_point = 0;
       var end_point = 0;
@@ -385,8 +386,8 @@
       var start_y = 126.972646; //출발지 경도
       var end_x = 37.570432; //도착지 위도
       var end_y = 126.9690019; //도착지 경도
-      var cctv1_color = 'CCTV1.png'; //cctv 색 변수로 바꾸기
-      var cctv2_color = 'CCTV1.png'; //cctv 색 변수로 바꾸기
+      var cctv1_color = 'CCTV3.png'; //cctv 색 변수로 바꾸기
+      var cctv2_color = 'CCTV3.png'; //cctv 색 변수로 바꾸기
       function change() {
         console.log('he');
         start_point = document.getElementById("u53_data").innerHTML; //출발지
@@ -414,8 +415,9 @@
             resultsMap.setCenter(results[0].geometry.location);
             console.log(start_point);
             console.log(results[0].geometry.viewport);
-            start_x = (results[0].geometry.viewport.Va.j + results[0].geometry.viewport.Va.i)/2;//위도
-            start_y = (results[0].geometry.viewport.Qa.j + results[0].geometry.viewport.Qa.i)/2;//경도
+            console.log(results[0].geometry.viewport.Hb.g);
+            start_y = (results[0].geometry.viewport.Hb.g + results[0].geometry.viewport.Hb.i)/2;//위도
+            start_x = (results[0].geometry.viewport.tc.g + results[0].geometry.viewport.tc.i)/2;//경도
             console.log(start_x, start_y);
             reset()
           } else {
@@ -426,8 +428,8 @@
           if (status === google.maps.GeocoderStatus.OK) {
             resultsMap.setCenter(results[0].geometry.location);
             console.log(end_point);
-            end_x = (results[0].geometry.viewport.Va.j + results[0].geometry.viewport.Va.i)/2;//위도
-            end_y = (results[0].geometry.viewport.Qa.j + results[0].geometry.viewport.Qa.i)/2;//경도
+            end_y = (results[0].geometry.viewport.Hb.g + results[0].geometry.viewport.Hb.i)/2;//위도
+            end_x = (results[0].geometry.viewport.tc.g + results[0].geometry.viewport.tc.i)/2;//경도
             console.log(end_x, end_y)
             reset()
           } else {

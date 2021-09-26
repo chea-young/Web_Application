@@ -1,4 +1,4 @@
-﻿﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <title>map</title>
@@ -53,7 +53,7 @@
     <div id="map" style="width: 1500px; height:800px;"></div>
 	<script>
 		var position = new naver.maps.LatLng(37.515105, 126.996357); //서울역 현재위치 default값
-    	var position_car = new naver.maps.LatLng(37.515105, 126.996357)
+    var position_car = new naver.maps.LatLng(37.515105, 126.996357); 
 		var position1 = new naver.maps.LatLng(37.522583, 126.961311); // 세종대로 사거리 CCTV
     var position2 = new naver.maps.LatLng(37.515105, 126.996357); // 청계2가 CCTV
     var lo1 = new naver.maps.LatLng(37.5657037, 126.9768616); //시청
@@ -67,7 +67,7 @@
 			mapTypeId: naver.maps.MapTypeId.NORMAL
 		});
 	var markerOptions_car = {
-        position: position_car,
+        position: new naver.maps.LatLng(37.515105, 126.996357),
         map: map,
         icon: {
           url: './images/CAR1.png',
@@ -98,9 +98,51 @@
 			}
 		};
 
+    var loOptions1 = {
+			position: lo1,
+			map: map,
+			icon: {
+				url: './images/red.png',
+				origin: new naver.maps.Point(0, 0),
+				anchor: new naver.maps.Point(11, 35)
+			}
+		};
+
+        var loOptions2 = {
+			position: lo2,
+			map: map,
+			icon: {
+				url: './images/orange.png',
+				origin: new naver.maps.Point(0, 0),
+				anchor: new naver.maps.Point(11, 35)
+			}
+		};
+            var loOptions3 = {
+			position: lo3,
+			map: map,
+			icon: {
+				url: './images/green.png',
+				origin: new naver.maps.Point(0, 0),
+				anchor: new naver.maps.Point(11, 35)
+			}
+		};
+            var loOptions4 = {
+			position: lo4,
+			map: map,
+			icon: {
+				url: './images/blue.png',
+				origin: new naver.maps.Point(0, 0),
+				anchor: new naver.maps.Point(11, 35)
+			}
+		};
+
 		var marker_cctv1 = new naver.maps.Marker(markerOptions1);
 		var marker_cctv2 = new naver.maps.Marker(markerOptions2);
-		var car = new naver.mpas.Marker(markerOptions_car);
+    var marker_lo1 = new naver.maps.Marker(loOptions1);
+    var marker_lo2 = new naver.maps.Marker(loOptions2);
+    var marker_lo3 = new naver.maps.Marker(loOptions3);
+    var marker_lo4 = new naver.maps.Marker(loOptions4);
+
 var infowindow = new naver.maps.InfoWindow();
 
 	</script>
